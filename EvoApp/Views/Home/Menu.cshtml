@@ -1,14 +1,21 @@
-﻿<ul>
-    <li class="menu-item" data-item-id="1">Oak</li>
-    <li class="menu-item" data-item-id="2">Birch</li>
-    <li class="menu-item" data-item-id="3">Maple</li>
-</ul>
-<script>
-    const selected = { itemId: -1 };
+﻿<label for="tree1">Oak</label>
+<input type="radio" id="tree1" name="item" value="1" />
+<label for="tree2">Birch</label>
+<input type="radio" id="tree2" name="item" value="2" />
+<label for="tree3">Maple</label>
+<input type="radio" id="tree3" name="item" value="3" />
 
-    [...document.getElementsByClassName("menu-item")].forEach(item => {
-        item.addEventListener("click", (ev) => {
-            selected.itemId = parseInt(ev.target.dataset.itemId, 10);
-        })
-    })
-</script>
+<style>
+    input[name="item"] {
+        display: none;
+    }
+    
+    label:has(+input:checked) {
+        color: white;
+    }
+    label {
+        width: 50%;
+        height: min-content;
+        padding: 5px;
+    }
+</style>

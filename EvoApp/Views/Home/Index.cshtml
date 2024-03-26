@@ -35,8 +35,10 @@
 			.forEach(land => land.addEventListener("click", (ev) => {
 				const { landX, landY } = ev.target.parentNode.dataset;
 				const { tileX, tileY } = ev.target.dataset;
+				const selected = document.querySelector("input[name='item']:checked");
+				if (!selected) return;
 				hubConnection.invoke("PlaceItem",
-					selected.itemId, parseInt(landX, 10), parseInt(landY), parseInt(tileX, 10), parseInt(tileY, 10));
+					parseInt(selected.value), parseInt(landX, 10), parseInt(landY), parseInt(tileX, 10), parseInt(tileY, 10));
 			}))
 
 		hubConnection.on("PlacedItem", item => {
