@@ -11,6 +11,7 @@ namespace EvoApp
 			builder.Services.AddControllersWithViews();
 			builder.Services.AddSignalR();
 			builder.Services.AddSingleton<LandMap>();
+			builder.Services.AddSingleton<LifeTime>();
 
 			var app = builder.Build();
 

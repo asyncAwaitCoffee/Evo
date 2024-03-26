@@ -1,6 +1,4 @@
-﻿@import url(reset.css);
-
-main {
+﻿main {
     display: grid;
     width: 90vmin;
     aspect-ratio: 1;

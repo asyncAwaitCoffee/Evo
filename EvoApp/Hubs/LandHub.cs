@@ -7,10 +7,19 @@ namespace EvoApp.Hubs
 {
 	public class LandHub : Hub
 	{
-		public void PlaceItem([FromServices] LandMap land, int itemId, int landX, int landY, int tileX, int tileY)
+		public void PlaceItem(
+			[FromServices] LandMap land,
+			[FromServices] LifeTime life,
+			int itemId,
+			int landX,
+			int landY,
+			int tileX,
+			int tileY)
 		{
 			LandTile landTile = land.GetLandTile(landX, landY);
-			landTile.PlaceItem(new Tree("Oak", tileX, tileY), tileX, tileY);
+			Tree tree = new Tree("Oak", tileX, tileY);
+			life.AddToLiving(tree);
+			landTile.PlaceItem(tree, tileX, tileY);
 			Clients.All.SendAsync("PlacedItem", new { itemId, landX, landY, tileX, tileY });
         }
 	}
