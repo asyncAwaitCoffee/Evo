@@ -1,0 +1,44 @@
+﻿@using EvoApp.Models
+@using EvoApp.Services
+@inject LandMap landMap
+
+@{
+	ViewBag.Title = "Index";
+}
+<div id="land-field">
+	@foreach (LandTile[] landRow in landMap.LandTiles)
+	{
+		foreach (LandTile land in landRow)
+		{
+			<div class="land-tile @land.LandType">
+				@foreach (WorldObject? grid in land.TileGrid)
+				{
+					<div></div>
+				}
+			</div>
+		}
+	}
+</div>
+
+@section lib {
+	<script src="lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+}
+@section style {
+	<link href="~/styles/home/index.css" rel="stylesheet" />
+}
+
+@section script {
+	<script>
+		const hubConnection = new signalR.HubConnectionBuilder().withUrl("/land").build();
+
+		[...document.getElementsByClassName("land-tile")]
+			.forEach(land => land.addEventListener("click", (ev) => {
+				hubConnection.invoke("PlaceItem", 1, 0, 0, 0, 0);
+			}))
+
+		hubConnection.on("PlacedItem", item => { console.log(item) });
+
+		hubConnection.start().then(() => { console.log("Socket connected!") });
+
+	</script>
+}
