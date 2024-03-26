@@ -13,7 +13,10 @@
 			{
 				@for (int x = 0; x < landTile.TileGrid.GetLength(1); x++)
 				{
-					<div data-tile-x="@x" data-tile-y="@y">@landTile.TileGrid[y, x]?.Name</div>
+					<div data-tile-x="@x" data-tile-y="@y">
+						<div class="item-name">@landTile.TileGrid[y, x]?.Name</div>
+						<div class="item-age"></div>						
+					</div>
 				}
 			}
 		</div>
@@ -44,12 +47,13 @@
 		hubConnection.on("PlacedItem", item => {
 			console.log(item);
 			// TODO - display recieved info: name, image...
-			/*
+			
 			document
 				.querySelector(`[data-land-x="${item.landX}"][data-land-y="${item.landY}"]`)
 				.querySelector(`[data-tile-x="${item.tileX}"][data-tile-y="${item.tileY}"]`)
+				.querySelector(".item-name")
 				.textContent = item.itemId;
-			*/
+			
 		
 		});
 
@@ -57,6 +61,7 @@
 			document
 				.querySelector(`[data-land-x="${item.coordinates.landX}"][data-land-y="${item.coordinates.landY}"]`)
 				.querySelector(`[data-tile-x="${item.coordinates.tileX}"][data-tile-y="${item.coordinates.tileY}"]`)
+				.querySelector(".item-age")
 				.textContent = item.age;
 		})
 
