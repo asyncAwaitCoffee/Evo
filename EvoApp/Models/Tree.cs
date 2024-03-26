@@ -11,7 +11,6 @@ namespace EvoApp.Models
 		public void Grow()
 		{
 			Age++;
-			Console.WriteLine($"I'm {Name} and I'm growing at {Coordinates}! My age is {Age}!");
         }
 	}
 }

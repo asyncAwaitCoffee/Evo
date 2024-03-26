@@ -8,5 +8,9 @@ namespace EvoApp.Controllers
 		{
 			return View();
 		}
+		public IActionResult Menu()
+		{
+			return PartialView();
+		}
 	}
 }

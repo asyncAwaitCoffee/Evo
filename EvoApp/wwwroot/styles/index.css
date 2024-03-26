@@ -6,10 +6,20 @@
     box-sizing: border-box;
 }
 
+ul {
+    list-style: none;
+}
+
 body {
     display: grid;
     width: 100vw;
     height: 100vh;
     align-content: center;
     justify-content: center;
+    grid-template-columns: auto auto;
+
+    @media screen and (width < 850px) {
+        grid-template-columns: auto;
+        grid-template-rows: auto auto;
+    }
 }

@@ -1,5 +1,19 @@
 ﻿main {
     display: grid;
-    width: 90vmin;
+    width: 95vmin;
     aspect-ratio: 1;
+}
+
+aside {
+    display: grid;
+    min-width: 20vmin;
+    width: 10vw;
+    background-color: dimgrey;
+
+    @media screen and (width < 850px) {
+        grid-template-columns: auto;
+        grid-template-rows: auto auto;
+        min-width: 80vmin;
+        height: 20vmin;
+    }
 }
