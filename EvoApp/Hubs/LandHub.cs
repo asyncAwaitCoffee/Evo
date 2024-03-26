@@ -17,7 +17,7 @@ namespace EvoApp.Hubs
 			int tileY)
 		{
 			LandTile landTile = land.GetLandTile(landX, landY);
-			Tree tree = new Tree("Oak", tileX, tileY);
+			Tree tree = new("Oak", landX, landY, tileX, tileY);
 			life.AddToLiving(tree);
 			landTile.PlaceItem(tree, tileX, tileY);
 			Clients.All.SendAsync("PlacedItem", new { itemId, landX, landY, tileX, tileY });

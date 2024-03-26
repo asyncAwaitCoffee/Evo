@@ -47,6 +47,16 @@
 		
 		});
 
+		hubConnection.on("Grow", item => {
+			console.log(item);
+			console.log(item.coordinates);
+			
+			document
+				.querySelector(`[data-land-x="${item.coordinates.landX}"][data-land-y="${item.coordinates.landY}"]`)
+				.querySelector(`[data-tile-x="${item.coordinates.tileX}"][data-tile-y="${item.coordinates.tileY}"]`)
+				.textContent = item.age;
+		})
+
 		hubConnection.start().then(() => { console.log("Socket connected!") });
 
 	</script>

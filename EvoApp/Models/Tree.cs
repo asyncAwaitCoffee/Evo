@@ -1,13 +1,17 @@
 ﻿using EvoApp.Interfaces;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace EvoApp.Models
 {
-	public class Tree(string name, int tyleX, int tyleY)
-		: WorldObject(name, tyleX, tyleY), ILive
+	public class Tree(string name, int landX, int landY, int tyleX, int tyleY)
+		: WorldObject(name, landX, landY, tyleX, tyleY), ILive
 	{
+		public int Age { get; set; }
+
 		public void Grow()
 		{
-            Console.WriteLine($"I'm {Name} and I'm growing at {Coordinates}!");
+			Age++;
+			Console.WriteLine($"I'm {Name} and I'm growing at {Coordinates}! My age is {Age}!");
         }
 	}
 }
