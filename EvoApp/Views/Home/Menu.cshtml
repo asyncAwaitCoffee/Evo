@@ -1,5 +1,14 @@
-﻿<aside>
-	<ul>
-    <li></li>
+﻿<ul>
+    <li class="menu-item" data-item-id="1">Oak</li>
+    <li class="menu-item" data-item-id="2">Birch</li>
+    <li class="menu-item" data-item-id="3">Maple</li>
 </ul>
-</aside>
+<script>
+    const selected = { itemId: -1 };
+
+    [...document.getElementsByClassName("menu-item")].forEach(item => {
+        item.addEventListener("click", (ev) => {
+            selected.itemId = parseInt(ev.target.dataset.itemId, 10);
+        })
+    })
+</script>

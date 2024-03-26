@@ -1,4 +1,5 @@
 ﻿using EvoApp.Models;
+using EvoApp.Repositories;
 using EvoApp.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
@@ -16,11 +17,16 @@ namespace EvoApp.Hubs
 			int tileX,
 			int tileY)
 		{
-			LandTile landTile = land.GetLandTile(landX, landY);
-			Tree tree = new("Oak", landX, landY, tileX, tileY);
-			life.AddToLiving(tree);
-			landTile.PlaceItem(tree, tileX, tileY);
-			Clients.All.SendAsync("PlacedItem", new { itemId, landX, landY, tileX, tileY });
+			if (WorldItems.Trees.TryGetValue(itemId, out string? treeName))
+			{
+				LandTile landTile = land.GetLandTile(landX, landY);
+                Tree tree = new(treeName, landX, landY, tileX, tileY);
+                life.AddToLiving(tree);
+                landTile.PlaceItem(tree, tileX, tileY);
+                Clients.All.SendAsync("PlacedItem", new { itemId, landX, landY, tileX, tileY });
+            }
+			
+			
         }
 	}
 }

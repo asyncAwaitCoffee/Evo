@@ -13,7 +13,9 @@
     <main>
         @RenderBody()
     </main>
-    @await Html.PartialAsync("Menu")
+    <aside>
+        @await Html.PartialAsync("Menu")
+    </aside>
     @RenderSection("script", false)
 </body>
 </html>
