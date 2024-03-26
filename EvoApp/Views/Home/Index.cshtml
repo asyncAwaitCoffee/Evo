@@ -6,17 +6,17 @@
 	ViewBag.Title = "Index";
 }
 <div id="land-field">
-	@foreach (LandTile[] landRow in landMap.LandTiles)
+	@foreach (var landTile in landMap.LandTiles)
 	{
-		foreach (LandTile land in landRow)
-		{
-			<div class="land-tile @land.LandType">
-				@foreach (WorldObject? grid in land.TileGrid)
+		<div data-land-x="@landTile.Coordinates.landX" data-land-y="@landTile.Coordinates.landY" class="land-tile @landTile.LandType">
+			@for (int y = 0; y < landTile.TileGrid.GetLength(0); y++)
+			{
+				@for (int x = 0; x < landTile.TileGrid.GetLength(1); x++)
 				{
-					<div></div>
+					<div data-tile-x="@x" data-tile-y="@y">@landTile.TileGrid[y, x]?.Name</div>
 				}
-			</div>
-		}
+			}
+		</div>
 	}
 </div>
 
@@ -33,10 +33,26 @@
 
 		[...document.getElementsByClassName("land-tile")]
 			.forEach(land => land.addEventListener("click", (ev) => {
-				hubConnection.invoke("PlaceItem", 1, 0, 0, 0, 0);
+				const { landX, landY } = ev.target.parentNode.dataset;
+				const { tileX, tileY } = ev.target.dataset;
+				hubConnection.invoke("PlaceItem",
+					1, parseInt(landX, 10), parseInt(landY), parseInt(tileX, 10), parseInt(tileY, 10));
 			}))
 
-		hubConnection.on("PlacedItem", item => { console.log(item) });
+		hubConnection.on("PlacedItem", item => {
+			console.log(item);
+			console.log(
+				document
+					.querySelector(`[data-land-x="${item.landX}"][data-land-y="${item.landY}"]`)
+					.querySelector(`[data-tile-x="${item.tileX}"][data-tile-y="${item.tileY}"]`)
+			
+			);
+			document
+				.querySelector(`[data-land-x="${item.landX}"][data-land-y="${item.landY}"]`)
+				.querySelector(`[data-tile-x="${item.tileX}"][data-tile-y="${item.tileY}"]`)
+				.textContent = item.itemId;
+		
+		});
 
 		hubConnection.start().then(() => { console.log("Socket connected!") });
 

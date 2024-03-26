@@ -24,20 +24,18 @@ namespace EvoApp
 
 			app.MapGet("api/land", (LandMap landMap) =>
 			{
-                foreach (var item in landMap.LandTiles)
+                foreach (var tile in landMap.LandTiles)
                 {
-					foreach (var tile in item)
-					{
-                        foreach (WorldObject? grid in tile.TileGrid)
-                        {
-							Console.ForegroundColor = ConsoleColor.Green;
-                            Console.WriteLine($"Colored name: {grid?.Name}");
-						}
-						Console.ResetColor();
-						Console.WriteLine(tile.TileGrid[0,0]?.Name ?? "None");
-						Console.WriteLine(tile.TileGrid[0,1]?.Name ?? "None");
-						Console.WriteLine(tile.TileGrid[0,2]?.Name ?? "None");
+					foreach (WorldObject? grid in tile.TileGrid)
+                    {
+						Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine($"Colored name: {grid?.Name}");
 					}
+					Console.ResetColor();
+					Console.WriteLine(tile.TileGrid[0,0]?.Name ?? "None");
+					Console.WriteLine(tile.TileGrid[0,1]?.Name ?? "None");
+					Console.WriteLine(tile.TileGrid[0,2]?.Name ?? "None");
+					
                 }
 			});
 

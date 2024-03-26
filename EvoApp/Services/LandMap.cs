@@ -5,15 +5,15 @@ namespace EvoApp.Services
 {
     public class LandMap
     {
-        public LandTile[][] LandTiles { get; init; } = [
-                [new(LandTypes.Mud), new(LandTypes.Water), new(LandTypes.Grass),],
-                [new(LandTypes.Water), new(LandTypes.Water), new(LandTypes.Mud),],
-                [new(LandTypes.Water), new(LandTypes.Grass), new(LandTypes.Grass),],
-            ];
+        public LandTile[,] LandTiles { get; init; } = {
+                {new(LandTypes.Mud, 0, 0), new(LandTypes.Water, 1, 0), new(LandTypes.Grass, 2, 0),},
+                {new(LandTypes.Water, 0, 1), new(LandTypes.Water, 1, 1), new(LandTypes.Mud, 2, 1), },
+                {new(LandTypes.Water, 0, 2), new(LandTypes.Grass, 1, 2), new(LandTypes.Grass, 2, 2),},
+        };
 
         public LandTile GetLandTile(int landX, int landY)
         {
-            return LandTiles[landX][landY];
+            return LandTiles[landY,landX];
         }
     }
 }

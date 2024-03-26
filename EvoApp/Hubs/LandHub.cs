@@ -11,8 +11,8 @@ namespace EvoApp.Hubs
 		{
             Console.WriteLine((itemId, landX, landY, tileX, tileY));
 			LandTile landTile = land.GetLandTile(landX, landY);
-			landTile.PlaceItem(new Tree("Oak"), tileX, tileY);
-			Clients.All.SendAsync("PlacedItem", 500);
+			landTile.PlaceItem(new Tree("Oak", tileX, tileY), tileX, tileY);
+			Clients.All.SendAsync("PlacedItem", new { itemId, landX, landY, tileX, tileY });
         }
 	}
 }
