@@ -17,10 +17,11 @@ namespace EvoApp
 			builder.Services.AddSignalR();
 			builder.Services.AddSingleton<LandMap>();
 			builder.Services.AddSingleton<LifeTime>();
+			builder.Services.AddSingleton<EvolveShemas>();
+			builder.Services.AddKeyedSingleton<PlantFactoryBase, GrasslandPlantFactory>("Grassland");
+			builder.Services.AddKeyedSingleton<PlantFactoryBase, WaterPlantFactory>("Water");
+			builder.Services.AddKeyedSingleton<PlantFactoryBase, MudPlantFactory>("Mud");
 			builder.Services.AddSingleton<WorldObjectFactory>();
-			builder.Services.AddKeyedSingleton<IPlantFactory, GrasslandPlantFactory>("Grassland");
-			builder.Services.AddKeyedSingleton<IPlantFactory, WaterPlantFactory>("Water");
-			builder.Services.AddKeyedSingleton<IPlantFactory, MudPlantFactory>("Mud");
 
 			var app = builder.Build();
 
@@ -32,9 +33,15 @@ namespace EvoApp
 				);
 
 #if DEBUG
-			app.MapGet("api/test", (LandMap landMap) =>
+			app.MapGet("api/test", () =>
 			{
-                Plant p = new Herb("", 1);
+				return Results.Json(new { data = "some info" });
+			});
+
+			app.MapGet("cat/{n}", (int n) =>
+			{
+				int x = n * 100 + 5;
+				return Results.Json(new { catName = "Kosha", foodLimit = "Unlimited", result = x });
 			});
 #endif
 			app.MapHub<LandHub>("/land");

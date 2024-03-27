@@ -39,9 +39,8 @@
 				const { landX, landY } = ev.target.parentNode.dataset;
 				const { tileX, tileY } = ev.target.dataset;
 				const subtype = document.querySelector("input[name='subtype']:checked");
-				const tier = subtype.parentNode.dataset.tier;
-				console.log(tier);
 				if (!subtype) return;
+				const tier = subtype.parentNode.dataset.tier;
 				hubConnection.invoke("PlacePlant",
 					parseInt(tier), parseInt(subtype.value), parseInt(landX, 10), parseInt(landY), parseInt(tileX, 10), parseInt(tileY, 10));
 			}))

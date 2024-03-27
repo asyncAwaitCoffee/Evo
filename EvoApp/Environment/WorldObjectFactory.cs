@@ -3,23 +3,23 @@ using EvoApp.Environment.Plants;
 
 namespace EvoApp.Environment
 {
-	public class WorldObjectFabric
+	public class WorldObjectFactory
 	{
-		private readonly IPlantFactory _grasslandPlantFabric;
-		private readonly IPlantFactory _waterPlantFabric;
-		private readonly IPlantFactory _mudPlantFabric;
+		private readonly PlantFactoryBase _grasslandPlantFabric;
+		private readonly PlantFactoryBase _waterPlantFabric;
+		private readonly PlantFactoryBase _mudPlantFabric;
 
-		public WorldObjectFabric(
-			[FromKeyedServices("Grassland")] IPlantFactory grasslandPlantFabric,
-			[FromKeyedServices("Water")] IPlantFactory waterPlantFabric,
-			[FromKeyedServices("Mud")] IPlantFactory mudPlantFabric
+		public WorldObjectFactory(
+			[FromKeyedServices("Grassland")] PlantFactoryBase grasslandPlantFabric,
+			[FromKeyedServices("Water")] PlantFactoryBase waterPlantFabric,
+			[FromKeyedServices("Mud")] PlantFactoryBase mudPlantFabric
 			)
         {
 			_grasslandPlantFabric = grasslandPlantFabric;
 			_waterPlantFabric = waterPlantFabric;
 			_mudPlantFabric = mudPlantFabric;
 		}
-        public IPlantFactory GetPlantFabric(LandTypes type)
+        public PlantFactoryBase GetPlantFabric(LandTypes type)
 		{
 			return type switch
 			{

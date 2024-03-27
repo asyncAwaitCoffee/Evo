@@ -14,14 +14,14 @@ namespace EvoApp.Hubs
 		public void PlacePlant(
 			[FromServices] LandMap land,
 			[FromServices] LifeTime life,
-			[FromServices] WorldObjectFabric worldObjectFabric,
+			[FromServices] WorldObjectFactory worldObjectFabric,
 			int tierId,
 			int subtypeId,
 			int landX, int landY,
 			int tileX, int tileY)
 		{
 			LandTile landTile = land.GetLandTile(landX, landY);
-			IPlantFactory plantFabric = worldObjectFabric.GetPlantFabric(landTile.LandType);
+			PlantFactoryBase plantFabric = worldObjectFabric.GetPlantFabric(landTile.LandType);
 
             Plant plant = plantFabric.Tier(tierId, subtypeId);
 

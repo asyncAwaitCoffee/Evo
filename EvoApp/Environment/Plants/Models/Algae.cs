@@ -1,6 +1,9 @@
-﻿namespace EvoApp.Environment.Plants.Models
+﻿using EvoApp.Models;
+
+namespace EvoApp.Environment.Plants.Models
 {
-	public class Algae(string name, int category) : Plant(name, category)
+	public class Algae(string name, int category, Predicate<LiveState> evolvePredicate)
+		: Plant(name, category, evolvePredicate)
 	{
 	}
 }
