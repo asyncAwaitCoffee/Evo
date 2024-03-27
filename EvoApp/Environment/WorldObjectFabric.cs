@@ -5,21 +5,21 @@ namespace EvoApp.Environment
 {
 	public class WorldObjectFabric
 	{
-		private readonly IPlantFabric _grasslandPlantFabric;
-		private readonly IPlantFabric _waterPlantFabric;
-		private readonly IPlantFabric _mudPlantFabric;
+		private readonly IPlantFactory _grasslandPlantFabric;
+		private readonly IPlantFactory _waterPlantFabric;
+		private readonly IPlantFactory _mudPlantFabric;
 
 		public WorldObjectFabric(
-			[FromKeyedServices("Grassland")] IPlantFabric grasslandPlantFabric,
-			[FromKeyedServices("Water")] IPlantFabric waterPlantFabric,
-			[FromKeyedServices("Mud")] IPlantFabric mudPlantFabric
+			[FromKeyedServices("Grassland")] IPlantFactory grasslandPlantFabric,
+			[FromKeyedServices("Water")] IPlantFactory waterPlantFabric,
+			[FromKeyedServices("Mud")] IPlantFactory mudPlantFabric
 			)
         {
 			_grasslandPlantFabric = grasslandPlantFabric;
 			_waterPlantFabric = waterPlantFabric;
 			_mudPlantFabric = mudPlantFabric;
 		}
-        public IPlantFabric GetPlantFabric(LandTypes type)
+        public IPlantFactory GetPlantFabric(LandTypes type)
 		{
 			return type switch
 			{

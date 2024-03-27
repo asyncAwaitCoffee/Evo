@@ -2,7 +2,7 @@
 
 namespace EvoApp.Environment.Plants
 {
-    public interface IPlantFabric
+    public interface IPlantFactory
 	{
 		Plant Tier(int tierId, int subtypeId)
 		{

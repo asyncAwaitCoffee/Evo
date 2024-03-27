@@ -2,7 +2,7 @@
 
 namespace EvoApp.Environment.Plants
 {
-	public class WaterPlantFabric : IPlantFabric
+	public class WaterPlantFactory : IPlantFactory
 	{
 		public Plant TierOne(int subtypeId)
 		{

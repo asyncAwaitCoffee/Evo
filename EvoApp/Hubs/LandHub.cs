@@ -21,7 +21,7 @@ namespace EvoApp.Hubs
 			int tileX, int tileY)
 		{
 			LandTile landTile = land.GetLandTile(landX, landY);
-			IPlantFabric plantFabric = worldObjectFabric.GetPlantFabric(landTile.LandType);
+			IPlantFactory plantFabric = worldObjectFabric.GetPlantFabric(landTile.LandType);
 
             Plant plant = plantFabric.Tier(tierId, subtypeId);
 
