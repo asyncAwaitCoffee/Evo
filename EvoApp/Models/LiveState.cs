@@ -1,20 +1,18 @@
 ﻿using EvoApp.Interfaces;
+using System.Text.Json.Serialization;
 
 namespace EvoApp.Models
 {
 	public class LiveState
 	{
         private int _age;
-        private readonly int _ageThreshold;
-        public LiveState(int ageThreshold)
-        {
-			_ageThreshold = ageThreshold;
-		}
+        [JsonIgnore]
+        public Predicate<LiveState> TryEvolve { get; set; }
         public int Age {
             get { return _age; }
             set {
                 _age = value;
-                if (Age >= _ageThreshold)
+                if (TryEvolve(this))
                 {
                     Evolved = true;
 					Console.WriteLine("Evolve!");
