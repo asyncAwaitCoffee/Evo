@@ -1,7 +1,6 @@
 ﻿using EvoApp.Environment.Plants.Models;
 using EvoApp.Repositories;
 using EvoApp.Services;
-using Microsoft.AspNetCore.Mvc;
 
 namespace EvoApp.Environment.Plants
 {

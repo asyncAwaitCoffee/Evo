@@ -1,5 +1,4 @@
-﻿using EvoApp.DTOs;
-using EvoApp.Enums;
+﻿using EvoApp.Enums;
 using EvoApp.Environment.Plants.Models;
 using EvoApp.Repositories;
 using EvoApp.Services;
@@ -12,20 +11,20 @@ namespace EvoApp.Environment.Plants
 	{
         public override Plant TierOne(int subtypeId)
 		{
-			PlantDataDTO plantData = _worldItems.GetPlantData(LandTypes.Mud, 1, subtypeId);
-			return new MudPlantain(plantData.Name, subtypeId, _evolveShemas.Age(10));
+			var (name, info) = _worldItems.GetPlantData(LandTypes.Mud, 1, subtypeId);
+			return new MudPlantain(name, subtypeId, _evolveShemas.Age(10));
 		}
 
 		public override Plant TierTwo(int subtypeId)
 		{
-			PlantDataDTO plantData = _worldItems.GetPlantData(LandTypes.Mud, 2, subtypeId);
-			return new MudPlantain(plantData.Name, subtypeId, _evolveShemas.Age(20));
+			var (name, info) = _worldItems.GetPlantData(LandTypes.Mud, 2, subtypeId);
+			return new MudPlantain(name, subtypeId, _evolveShemas.Age(20));
 		}
 
 		public override Plant TierThree(int subtypeId)
 		{
-			PlantDataDTO plantData = _worldItems.GetPlantData(LandTypes.Mud, 3, subtypeId);
-			return new MudPlantain(plantData.Name, subtypeId, _evolveShemas.Age(30));
+			var (name, info) = _worldItems.GetPlantData(LandTypes.Mud, 3, subtypeId);
+			return new MudPlantain(name, subtypeId, _evolveShemas.Age(30));
 		}
 	}
 }
