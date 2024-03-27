@@ -7,7 +7,7 @@ namespace EvoApp.Repositories
 {
 	public class WorldItemsRepo : IWorldItemsRepo
 	{
-		private Dictionary<LandTypes, Dictionary<int, Dictionary<int, PlantData>>> _plants;
+		private Dictionary<LandTypes, Dictionary<int, Dictionary<int, PlantDataDTO>>> _plants;
 		public WorldItemsRepo()
 		{
 			// LandTypes -> Tier -> subcategory -> plant data
@@ -92,7 +92,7 @@ namespace EvoApp.Repositories
 			};
 		}
 
-		public PlantData GetPlantData(LandTypes landType, int tier, int subcategory)
+		public PlantDataDTO GetPlantData(LandTypes landType, int tier, int subcategory)
 		{
 			if (_plants.TryGetValue(landType, out var landPlants))
 			{
