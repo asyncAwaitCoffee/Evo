@@ -2,27 +2,14 @@
 @using EvoApp.Enums
 @inject IWorldItemsRepo worldItemsRepo
 
-<div data-tier="1">
-    @foreach (var plant in worldItemsRepo.GetLandPlantsByTier(LandTypes.Grass, 1))
-    {
-        <label for="st@($"1{plant.Key}")">@plant.Value.Name</label>
-        <input type="radio" id="st@($"1{plant.Key}")" name="subtype" value="@plant.Key" />
-    }
-</div>
-<div data-tier="2">
-    @foreach (var plant in worldItemsRepo.GetLandPlantsByTier(LandTypes.Grass, 2))
-    {
-        <label for="st@($"2{plant.Key}")">@plant.Value.Name</label>
-        <input type="radio" id="st@($"2{plant.Key}")" name="subtype" value="@plant.Key" />
-    }
-</div>
-<div data-tier="3">
-    @foreach (var plant in worldItemsRepo.GetLandPlantsByTier(LandTypes.Grass, 3))
-    {
-        <label for="st@($"3{plant.Key}")">@plant.Value.Name</label>
-        <input type="radio" id="st@($"3{plant.Key}")" name="subtype" value="@plant.Key" />
-    }
-</div>
+
+@foreach (var plant in worldItemsRepo.GetPlants())
+{
+    <div data-tier="@plant.tier">
+        <label for="st@($"{plant.tier}{plant.subcategory}")">@plant.Name</label>
+        <input type="radio" id="st@($"{plant.tier}{plant.subcategory}")" name="subtype" value="@plant.subcategory" />
+    </div>
+}
 
 <style>
     input[name="subtype"] {
