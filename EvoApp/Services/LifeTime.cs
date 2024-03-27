@@ -10,35 +10,36 @@ namespace EvoApp.Services
 	{
 		private PeriodicTimer _timer;
 		private IHubContext<LandHub> _landHubContext;
-		private ConcurrentDictionary<ILive, LiveState?> _lives = [];
+		private ConcurrentDictionary<ILive, bool> _lives = [];
+
 		public LifeTime(IHubContext<LandHub> landHubContext) {
 			_timer = new PeriodicTimer(TimeSpan.FromSeconds(1));
 			_landHubContext = landHubContext;
 			Start();
 		}
 
-		public void AddToLiving(ILive live)
+		public void AddToLiving(ILive live, bool evolved = false)
 		{
-			_lives.TryAdd(live, null);
+			_lives.TryAdd(live, evolved);
 		}
 
-		public LiveState? RemoveFromLiving(ILive live)
+		public void RemoveFromLiving(ILive live)
 		{
-			if (_lives.TryRemove(live, out LiveState? liveState))
-			{
-				return liveState;
-			}
-			// TODO - return empty LiveState default
-			return null;
+			_lives.TryRemove(live, out _);
 		}
 
 		private async void Start()
 		{
+			// TODO - strange things here
             while (await _timer.WaitForNextTickAsync())
             {
                 foreach (var live in _lives)
                 {
 					live.Key.Grow();
+					if (!live.Value)
+					{
+						live.Key.State.TryEvolve();
+					}
 					_landHubContext.Clients.All.SendAsync("Grow", live.Key);
 				}
             }

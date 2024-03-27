@@ -30,9 +30,6 @@ namespace EvoApp.Hubs
             life.AddToLiving(plant);
 			landTile.PlaceItem(plant, tileX, tileY);
             Clients.All.SendAsync("PlacedItem", new { itemId = 50, landX, landY, tileX, tileY });
-            
-			
-			
         }
 	}
 }

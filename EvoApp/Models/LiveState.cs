@@ -7,18 +7,17 @@ namespace EvoApp.Models
 	{
         private int _age;
         [JsonIgnore]
-        public Predicate<LiveState> TryEvolve { get; set; }
+        public Predicate<LiveState> EvolveSchema { get; set; }
         public int Age {
             get { return _age; }
             set {
                 _age = value;
-                if (TryEvolve(this))
-                {
-                    Evolved = true;
-					Console.WriteLine("Evolve!");
-                }
             }
         }
         public bool Evolved { get; private set; }
+        public bool TryEvolve()
+        {
+            return EvolveSchema is not null && EvolveSchema(this);
+        }
     }
 }
