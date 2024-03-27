@@ -3,10 +3,10 @@ using System.Collections.Immutable;
 
 namespace EvoApp.Repositories
 {
-    public static class WorldItems
+    public class WorldItems
     {
-        public static ImmutableDictionary<int, string> Trees { get; } = ImmutableDictionary<int, string>.Empty;
-        static WorldItems()
+        public ImmutableDictionary<int, string> Trees { get; } = ImmutableDictionary<int, string>.Empty;
+		public WorldItems()
         {
             Dictionary<int, string> trees = new()
             {

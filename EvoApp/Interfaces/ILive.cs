@@ -2,7 +2,10 @@
 {
 	public interface ILive
 	{
-		public void Grow();
+		public void Grow()
+		{
+			Age++;
+		}
         public int Age { get; set; }
     }
 }

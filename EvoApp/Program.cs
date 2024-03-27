@@ -1,4 +1,9 @@
+using EvoApp.Environment;
+using EvoApp.Environment.Plants;
+using EvoApp.Environment.Plants.Models;
 using EvoApp.Hubs;
+using EvoApp.Models;
+using EvoApp.Repositories;
 using EvoApp.Services;
 
 namespace EvoApp
@@ -12,6 +17,10 @@ namespace EvoApp
 			builder.Services.AddSignalR();
 			builder.Services.AddSingleton<LandMap>();
 			builder.Services.AddSingleton<LifeTime>();
+			builder.Services.AddSingleton<WorldItems>();
+			builder.Services.AddSingleton<WorldObjectFabric>();
+			builder.Services.AddKeyedSingleton<IPlantFabric, GrasslandPlantFabric>("Grassland");
+			builder.Services.AddKeyedSingleton<IPlantFabric, WaterPlantFabric>("Water");
 
 			var app = builder.Build();
 
@@ -25,7 +34,9 @@ namespace EvoApp
 #if DEBUG
 			app.MapGet("api/test", (LandMap landMap) =>
 			{
-                
+                Plant p = new Herb("", 1);
+
+				//int landX, int landY, int tyleX, int tyleY
 			});
 #endif
 			app.MapHub<LandHub>("/land");
