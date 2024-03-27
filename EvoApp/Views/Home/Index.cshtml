@@ -59,12 +59,12 @@
 		
 		});
 
-		hubConnection.on("Grow", item => {			
+		hubConnection.on("Grow", item => {
 			document
 				.querySelector(`[data-land-x="${item.coordinates.landX}"][data-land-y="${item.coordinates.landY}"]`)
 				.querySelector(`[data-tile-x="${item.coordinates.tileX}"][data-tile-y="${item.coordinates.tileY}"]`)
 				.querySelector(".item-age")
-				.textContent = item.age;
+				.textContent = item.state.age;
 		})
 
 		hubConnection.start().then(() => { console.log("Socket connected!") });

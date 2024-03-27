@@ -1,11 +1,13 @@
-﻿namespace EvoApp.Interfaces
+﻿using EvoApp.Models;
+
+namespace EvoApp.Interfaces
 {
 	public interface ILive
 	{
+		public LiveState State { get; init; }
 		public void Grow()
 		{
-			Age++;
+			State.Age++;
 		}
-        public int Age { get; set; }
     }
 }

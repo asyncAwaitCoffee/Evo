@@ -6,7 +6,7 @@ namespace EvoApp.Environment.Plants
 	{
 		public Plant TierOne(int subtypeId)
 		{
-			string nameBasedOnCategory = "Water T1 ST{subtypeId}";
+			string nameBasedOnCategory = $"Water T1 ST{subtypeId}";
 			return new Algae(nameBasedOnCategory, subtypeId);
 		}
 
@@ -18,7 +18,7 @@ namespace EvoApp.Environment.Plants
 
 		public Plant TierThree(int subtypeId)
 		{
-			string nameBasedOnCategory = "Water T3 ST{subtypeId}";
+			string nameBasedOnCategory = $"Water T3 ST{subtypeId}";
 			return new Algae(nameBasedOnCategory, subtypeId);
 		}
 	}
