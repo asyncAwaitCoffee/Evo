@@ -1,28 +1,31 @@
-﻿using EvoApp.Environment.Plants.Models;
+﻿using EvoApp.DTOs;
+using EvoApp.Enums;
+using EvoApp.Environment.Plants.Models;
+using EvoApp.Repositories;
 using EvoApp.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EvoApp.Environment.Plants
 {
-	public class MudPlantFactory([FromServices] EvolveShemas evolveShemas)
-		: PlantFactoryBase(evolveShemas)
+	public class MudPlantFactory([FromServices] EvolveShemas evolveShemas, [FromServices] IWorldItemsRepo worldItems)
+		: PlantFactoryBase(evolveShemas, worldItems)
 	{
         public override Plant TierOne(int subtypeId)
 		{
-			string nameBasedOnCategory = $"Mud T1 ST{subtypeId}";
-			return new MudPlantain(nameBasedOnCategory, subtypeId, _evolveShemas.Age(10));
+			PlantData plantData = _worldItems.GetPlantData(LandTypes.Mud, 1, subtypeId);
+			return new MudPlantain(plantData.Name, subtypeId, _evolveShemas.Age(10));
 		}
 
 		public override Plant TierTwo(int subtypeId)
 		{
-			string nameBasedOnCategory = $"Mud T2 ST{subtypeId}";
-			return new MudPlantain(nameBasedOnCategory, subtypeId, _evolveShemas.Age(20));
+			PlantData plantData = _worldItems.GetPlantData(LandTypes.Mud, 2, subtypeId);
+			return new MudPlantain(plantData.Name, subtypeId, _evolveShemas.Age(20));
 		}
 
 		public override Plant TierThree(int subtypeId)
 		{
-			string nameBasedOnCategory = $"Mud T3 ST{subtypeId}";
-			return new MudPlantain(nameBasedOnCategory, subtypeId, _evolveShemas.Age(30));
+			PlantData plantData = _worldItems.GetPlantData(LandTypes.Mud, 3, subtypeId);
+			return new MudPlantain(plantData.Name, subtypeId, _evolveShemas.Age(30));
 		}
 	}
 }

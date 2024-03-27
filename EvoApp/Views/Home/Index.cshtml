@@ -46,14 +46,13 @@
 			}))
 
 		hubConnection.on("PlacedItem", item => {
-			console.log(item);
 			// TODO - display recieved info: name, image...
 			
 			document
 				.querySelector(`[data-land-x="${item.landX}"][data-land-y="${item.landY}"]`)
 				.querySelector(`[data-tile-x="${item.tileX}"][data-tile-y="${item.tileY}"]`)
 				.querySelector(".item-name")
-				.textContent = item.itemId;
+				.textContent = item.name;
 			
 		
 		});

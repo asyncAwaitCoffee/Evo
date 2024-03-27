@@ -29,7 +29,7 @@ namespace EvoApp.Hubs
 			plant.Coordinates = coordinates;
             life.AddToLiving(plant);
 			landTile.PlaceItem(plant, tileX, tileY);
-            Clients.All.SendAsync("PlacedItem", new { itemId = 50, landX, landY, tileX, tileY });
+            Clients.All.SendAsync("PlacedItem", new { name = plant.Name, landX, landY, tileX, tileY });
         }
 	}
 }

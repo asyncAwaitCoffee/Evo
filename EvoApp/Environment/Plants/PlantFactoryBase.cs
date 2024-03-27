@@ -1,4 +1,5 @@
 ﻿using EvoApp.Environment.Plants.Models;
+using EvoApp.Repositories;
 using EvoApp.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,9 +8,11 @@ namespace EvoApp.Environment.Plants
 	public abstract class PlantFactoryBase
 	{
 		protected readonly EvolveShemas _evolveShemas;
-		public PlantFactoryBase(EvolveShemas evolveShemas)
+		protected readonly IWorldItemsRepo _worldItems;
+		public PlantFactoryBase(EvolveShemas evolveShemas, IWorldItemsRepo worldItems)
 		{
 			_evolveShemas = evolveShemas;
+			_worldItems = worldItems;
 		}
 		public Plant Tier(int tierId, int subtypeId)
 		{

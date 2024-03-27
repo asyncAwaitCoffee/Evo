@@ -1,26 +1,31 @@
-﻿using EvoApp.Environment.Plants.Models;
+﻿using EvoApp.DTOs;
+using EvoApp.Enums;
+using EvoApp.Environment.Plants.Models;
+using EvoApp.Repositories;
 using EvoApp.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EvoApp.Environment.Plants
 {
-    public class GrasslandPlantFactory([FromServices] EvolveShemas evolveShemas)
-		: PlantFactoryBase(evolveShemas)
+    public class GrasslandPlantFactory([FromServices] EvolveShemas evolveShemas, [FromServices] IWorldItemsRepo worldItems)
+		: PlantFactoryBase(evolveShemas, worldItems)
 	{
 		public override Plant TierOne(int subtypeId)
 		{
-			string nameBasedOnCategory = $"Grass T1 ST{subtypeId}";
-			return new Herb(nameBasedOnCategory, subtypeId, _evolveShemas.Age(10));
+			PlantData plantData = _worldItems.GetPlantData(LandTypes.Grass, 1, subtypeId);
+			return new Herb(plantData.Name, subtypeId, _evolveShemas.Age(10));
 		}
+
 		public override Plant TierTwo(int subtypeId)
 		{
-			string nameBasedOnCategory = $"Grass T2 ST{subtypeId}";
-			return new Bush(nameBasedOnCategory, subtypeId, _evolveShemas.Age(20));
+			PlantData plantData = _worldItems.GetPlantData(LandTypes.Grass, 2, subtypeId);
+			return new Bush(plantData.Name, subtypeId, _evolveShemas.Age(20));
 		}
+
 		public override Plant TierThree(int subtypeId)
 		{
-			string nameBasedOnCategory = $"Grass T3 ST{subtypeId}";
-			return new Tree(nameBasedOnCategory, subtypeId, _evolveShemas.Age(30));
+			PlantData plantData = _worldItems.GetPlantData(LandTypes.Grass, 3, subtypeId);
+			return new Tree(plantData.Name, subtypeId, _evolveShemas.Age(30));
 		}
 	}
 }
