@@ -4,22 +4,22 @@ namespace EvoApp.Environment.Plants
 {
 	public class WaterPlantFabric : IPlantFabric
 	{
-		public Plant TierOne(int category)
+		public Plant TierOne(int subtypeId)
 		{
-			string nameBasedOnCategory = "Test Water Name 1";
-			return new Algae(nameBasedOnCategory, category);
+			string nameBasedOnCategory = "Water T1 ST{subtypeId}";
+			return new Algae(nameBasedOnCategory, subtypeId);
 		}
 
-		public Plant TierTwo(int category)
+		public Plant TierTwo(int subtypeId)
 		{
-			string nameBasedOnCategory = "Test Water Name 3";
-			return new Algae(nameBasedOnCategory, category);
+			string nameBasedOnCategory = $"Water T2 ST{subtypeId}";
+			return new Algae(nameBasedOnCategory, subtypeId);
 		}
 
-		public Plant TierThree(int category)
+		public Plant TierThree(int subtypeId)
 		{
-			string nameBasedOnCategory = "Test Water Name 2";
-			return new Algae(nameBasedOnCategory, category);
+			string nameBasedOnCategory = "Water T3 ST{subtypeId}";
+			return new Algae(nameBasedOnCategory, subtypeId);
 		}
 	}
 }

@@ -7,14 +7,17 @@ namespace EvoApp.Environment
 	{
 		private readonly IPlantFabric _grasslandPlantFabric;
 		private readonly IPlantFabric _waterPlantFabric;
+		private readonly IPlantFabric _mudPlantFabric;
 
 		public WorldObjectFabric(
 			[FromKeyedServices("Grassland")] IPlantFabric grasslandPlantFabric,
-			[FromKeyedServices("Water")] IPlantFabric waterPlantFabric
+			[FromKeyedServices("Water")] IPlantFabric waterPlantFabric,
+			[FromKeyedServices("Mud")] IPlantFabric mudPlantFabric
 			)
         {
 			_grasslandPlantFabric = grasslandPlantFabric;
 			_waterPlantFabric = waterPlantFabric;
+			_mudPlantFabric = mudPlantFabric;
 		}
         public IPlantFabric GetPlantFabric(LandTypes type)
 		{
@@ -22,6 +25,7 @@ namespace EvoApp.Environment
 			{
 				LandTypes.Grass => _grasslandPlantFabric,
 				LandTypes.Water => _waterPlantFabric,
+				LandTypes.Mud => _mudPlantFabric,
 				_ => throw new NotImplementedException()
 			};
 		}

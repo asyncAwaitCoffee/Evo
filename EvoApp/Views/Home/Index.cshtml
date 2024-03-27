@@ -38,10 +38,12 @@
 			.forEach(land => land.addEventListener("click", (ev) => {
 				const { landX, landY } = ev.target.parentNode.dataset;
 				const { tileX, tileY } = ev.target.dataset;
-				const selected = document.querySelector("input[name='item']:checked");
-				if (!selected) return;
-				hubConnection.invoke("PlaceItem",
-					parseInt(selected.value), parseInt(landX, 10), parseInt(landY), parseInt(tileX, 10), parseInt(tileY, 10));
+				const subtype = document.querySelector("input[name='subtype']:checked");
+				const tier = subtype.parentNode.dataset.tier;
+				console.log(tier);
+				if (!subtype) return;
+				hubConnection.invoke("PlacePlant",
+					parseInt(tier), parseInt(subtype.value), parseInt(landX, 10), parseInt(landY), parseInt(tileX, 10), parseInt(tileY, 10));
 			}))
 
 		hubConnection.on("PlacedItem", item => {

@@ -1,6 +1,7 @@
 ﻿using EvoApp.Hubs;
 using EvoApp.Interfaces;
 using Microsoft.AspNetCore.SignalR;
+using System.Collections.Concurrent;
 
 namespace EvoApp.Services
 {
@@ -8,9 +9,9 @@ namespace EvoApp.Services
 	{
 		private PeriodicTimer _timer;
 		private IHubContext<LandHub> _landHubContext;
-		private List<ILive> _lives = [];
+		private ConcurrentBag<ILive> _lives = [];
 		public LifeTime(IHubContext<LandHub> landHubContext) {
-			_timer = new PeriodicTimer(TimeSpan.FromSeconds(2));
+			_timer = new PeriodicTimer(TimeSpan.FromSeconds(1));
 			_landHubContext = landHubContext;
 			Start();
 		}

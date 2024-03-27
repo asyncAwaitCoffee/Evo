@@ -4,20 +4,20 @@ namespace EvoApp.Environment.Plants
 {
     public class GrasslandPlantFabric : IPlantFabric
 	{
-		public Plant TierOne(int category)
+		public Plant TierOne(int subtypeId)
 		{
-			string nameBasedOnCategory = "Test Grass Name 1";
-			return new Herb(nameBasedOnCategory, category);
+			string nameBasedOnCategory = $"Grass T1 ST{subtypeId}";
+			return new Herb(nameBasedOnCategory, subtypeId);
 		}
-		public Plant TierTwo(int category)
+		public Plant TierTwo(int subtypeId)
 		{
-			string nameBasedOnCategory = "Test Grass Name 2";
-			return new Bush(nameBasedOnCategory, category);
+			string nameBasedOnCategory = $"Grass T2 ST{subtypeId}";
+			return new Bush(nameBasedOnCategory, subtypeId);
 		}
-		public Plant TierThree(int category)
+		public Plant TierThree(int subtypeId)
 		{
-			string nameBasedOnCategory = "Test Grass Name 3";
-			return new Tree(nameBasedOnCategory, category);
+			string nameBasedOnCategory = $"Grass T3 ST{subtypeId}";
+			return new Tree(nameBasedOnCategory, subtypeId);
 		}
 	}
 }
