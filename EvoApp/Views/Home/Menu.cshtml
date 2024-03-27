@@ -5,9 +5,9 @@
 
 @foreach (var plant in worldItemsRepo.GetPlants())
 {
-    <div data-tier="@plant.tier">
-        <label for="st@($"{plant.tier}{plant.subcategory}")">@plant.Name</label>
-        <input type="radio" id="st@($"{plant.tier}{plant.subcategory}")" name="subtype" value="@plant.subcategory" />
+    <div class="plant-item" data-tier="@plant.tier">
+        <label class="text-@plant.landType" for="@($"{plant.landType}-{plant.tier}-{plant.subcategory}")">@plant.Name</label>
+        <input type="radio" id="@($"{plant.landType}-{plant.tier}-{plant.subcategory}")" name="subtype" value="@plant.subcategory" />
     </div>
 }
 
@@ -17,11 +17,17 @@
     }
     
     label:has(+input:checked) {
-        color: white;
+        background-color: white;
+        color: black;
     }
-    label {
-        width: 50%;
-        height: min-content;
+
+    .plant-item {
         padding: 5px;
+        width: 33%;
+    }
+
+    label {
+        width: min-content;
+        height: min-content;
     }
 </style>

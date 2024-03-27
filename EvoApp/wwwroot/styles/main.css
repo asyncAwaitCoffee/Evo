@@ -11,5 +11,17 @@ aside {
     flex-wrap: wrap;
     min-width: 20vmin;
     width: 10vw;
-    background-color: dimgrey;
+    background-color: black;
+}
+
+.text-Grass {
+    color: lawngreen;
+}
+
+.text-Mud {
+    color: saddlebrown;
+}
+
+.text-Water {
+    color: cornflowerblue;
 }

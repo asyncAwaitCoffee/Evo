@@ -10,7 +10,7 @@ namespace EvoApp.Repositories
 		private Dictionary<LandTypes, Dictionary<int, Dictionary<int, PlantDataDTO>>> _plants;
 		public WorldItemsRepo()
 		{
-			// LandTypes -> Tier -> subcategory -> plant data
+			// LandTypes -> Tier -> { subcategory : plant data }
 
 			_plants = new()
 			{
@@ -43,23 +43,23 @@ namespace EvoApp.Repositories
 					new() {
 						{ 1,
 							new() {
-								{ 1, new("", "", LandTypes.Mud, 1, 1) },
-								{ 2, new("", "", LandTypes.Mud, 1, 2) },
-								{ 3, new("", "", LandTypes.Mud, 1, 3) },
+								{ 1, new("Mud11", "", LandTypes.Mud, 1, 1) },
+								{ 2, new("Mud12", "", LandTypes.Mud, 1, 2) },
+								{ 3, new("Mud13", "", LandTypes.Mud, 1, 3) },
 							}
 						},
 						{ 2,
 							new() {
-								{ 1, new("", "", LandTypes.Mud, 2, 1) },
-								{ 2, new("", "", LandTypes.Mud, 2, 2) },
-								{ 3, new("", "", LandTypes.Mud, 2, 3) },
+								{ 1, new("Mud21", "", LandTypes.Mud, 2, 1) },
+								{ 2, new("Mud22", "", LandTypes.Mud, 2, 2) },
+								{ 3, new("Mud23", "", LandTypes.Mud, 2, 3) },
 							}
 						},
 						{ 3,
 							new() {
-								{ 1, new("", "", LandTypes.Mud, 3, 1) },
-								{ 2, new("", "", LandTypes.Mud, 3, 2) },
-								{ 3, new("", "", LandTypes.Mud, 3, 3) },
+								{ 1, new("Mud31", "", LandTypes.Mud, 3, 1) },
+								{ 2, new("Mud32", "", LandTypes.Mud, 3, 2) },
+								{ 3, new("Mud33", "", LandTypes.Mud, 3, 3) },
 							}
 						},
 					}
@@ -68,23 +68,23 @@ namespace EvoApp.Repositories
 					new() {
 						{ 1,
 							new() {
-								{ 1, new("", "", LandTypes.Water, 1, 1) },
-								{ 2, new("", "", LandTypes.Water, 1, 2) },
-								{ 3, new("", "", LandTypes.Water, 1, 3) },
+								{ 1, new("Water11", "", LandTypes.Water, 1, 1) },
+								{ 2, new("Water12", "", LandTypes.Water, 1, 2) },
+								{ 3, new("Water13", "", LandTypes.Water, 1, 3) },
 							}
 						},
 						{ 2,
 							new() {
-								{ 1, new("", "", LandTypes.Water, 2, 1) },
-								{ 2, new("", "", LandTypes.Water, 2, 2) },
-								{ 3, new("", "", LandTypes.Water, 2, 3) },
+								{ 1, new("Water21", "", LandTypes.Water, 2, 1) },
+								{ 2, new("Water22", "", LandTypes.Water, 2, 2) },
+								{ 3, new("Water23", "", LandTypes.Water, 2, 3) },
 							}
 						},
 						{ 3,
 							new() {
-								{ 1, new("", "", LandTypes.Water, 3, 1) },
-								{ 2, new("", "", LandTypes.Water, 3, 2) },
-								{ 3, new("", "", LandTypes.Water, 3, 3) },
+								{ 1, new("Water31", "", LandTypes.Water, 3, 1) },
+								{ 2, new("Water32", "", LandTypes.Water, 3, 2) },
+								{ 3, new("Water33", "", LandTypes.Water, 3, 3) },
 							}
 						},
 					}
