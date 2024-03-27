@@ -17,7 +17,7 @@ namespace EvoApp
 			builder.Services.AddSignalR();
 			builder.Services.AddSingleton<LandMap>();
 			builder.Services.AddSingleton<LifeTime>();
-			builder.Services.AddSingleton<WorldObjectFabric>();
+			builder.Services.AddSingleton<WorldObjectFactory>();
 			builder.Services.AddKeyedSingleton<IPlantFactory, GrasslandPlantFactory>("Grassland");
 			builder.Services.AddKeyedSingleton<IPlantFactory, WaterPlantFactory>("Water");
 			builder.Services.AddKeyedSingleton<IPlantFactory, MudPlantFactory>("Mud");
