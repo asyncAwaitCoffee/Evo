@@ -7,6 +7,6 @@ namespace EvoApp.Environment.Plants.Models
     {
         public int Category { get; set; } = category;
         public int Age { get; set; }
-		public LiveState State { get; init; } = new();
+		public LiveState State { get; init; } = new(10);
 	}
 }
