@@ -18,23 +18,23 @@ namespace EvoApp.Repositories
 					new() {
 						{ 1,
 							new() {
-								{ 1, new("Dandelion") },
-								{ 2, new("Ryegrass") },
-								{ 3, new("Marigold") },
+								{ 1, new("Dandelion", "") },
+								{ 2, new("Ryegrass", "") },
+								{ 3, new("Marigold", "") },
 							}
 						},
 						{ 2,
 							new() {
-								{ 1, new("Rhododendron") },
-								{ 2, new("Boxwood") },
-								{ 3, new("Forsythia") },
+								{ 1, new("Rhododendron", "") },
+								{ 2, new("Boxwood", "") },
+								{ 3, new("Forsythia", "") },
 							}
 						},
 						{ 3,
 							new() {
-								{ 1, new("Birch") },
-								{ 2, new("Maple") },
-								{ 3, new("Oak") },
+								{ 1, new("Birch", "") },
+								{ 2, new("Maple", "") },
+								{ 3, new("Oak", "") },
 							}
 						},
 					}
@@ -43,23 +43,23 @@ namespace EvoApp.Repositories
 					new() {
 						{ 1,
 							new() {
-								{ 1, new("") },
-								{ 2, new("") },
-								{ 3, new("") },
+								{ 1, new("", "") },
+								{ 2, new("", "") },
+								{ 3, new("", "") },
 							}
 						},
 						{ 2,
 							new() {
-								{ 1, new("") },
-								{ 2, new("") },
-								{ 3, new("") },
+								{ 1, new("", "") },
+								{ 2, new("", "") },
+								{ 3, new("", "") },
 							}
 						},
 						{ 3,
 							new() {
-								{ 1, new("") },
-								{ 2, new("") },
-								{ 3, new("") },
+								{ 1, new("", "") },
+								{ 2, new("", "") },
+								{ 3, new("", "") },
 							}
 						},
 					}
@@ -68,23 +68,23 @@ namespace EvoApp.Repositories
 					new() {
 						{ 1,
 							new() {
-								{ 1, new("") },
-								{ 2, new("") },
-								{ 3, new("") },
+								{ 1, new("", "") },
+								{ 2, new("", "") },
+								{ 3, new("", "") },
 							}
 						},
 						{ 2,
 							new() {
-								{ 1, new("") },
-								{ 2, new("") },
-								{ 3, new("") },
+								{ 1, new("", "") },
+								{ 2, new("", "") },
+								{ 3, new("", "") },
 							}
 						},
 						{ 3,
 							new() {
-								{ 1, new("") },
-								{ 2, new("") },
-								{ 3, new("") },
+								{ 1, new("", "") },
+								{ 2, new("", "") },
+								{ 3, new("", "") },
 							}
 						},
 					}
@@ -104,7 +104,21 @@ namespace EvoApp.Repositories
 					}
 				}
 			}
-			return new("Unknown");
+			return new("Unknown", "No info available");
 		}
+
+		public IEnumerable<KeyValuePair<int, PlantDataDTO>> GetLandPlantsByTier(LandTypes landType, int tier)
+		{
+			if (_plants.TryGetValue(landType, out var landPlants))
+			{
+				if (landPlants.TryGetValue(tier, out var tierPlants))
+				{
+					foreach (var plant in tierPlants)
+					{
+						yield return plant;
+					}
+				}
+			}
+        }
 	}
 }

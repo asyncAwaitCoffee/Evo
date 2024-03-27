@@ -1,26 +1,27 @@
-﻿<div data-tier="1">
-    <label for="st11">Oak</label>
-    <input type="radio" id="st11" name="subtype" value="1" />
-    <label for="st12">Birch</label>
-    <input type="radio" id="st12" name="subtype" value="2" />
-    <label for="st13">Maple</label>
-    <input type="radio" id="st13" name="subtype" value="3" />
+﻿@using EvoApp.Repositories
+@using EvoApp.Enums
+@inject IWorldItemsRepo worldItemsRepo
+
+<div data-tier="1">
+    @foreach (var plant in worldItemsRepo.GetLandPlantsByTier(LandTypes.Grass, 1))
+    {
+        <label for="st@($"1{plant.Key}")">@plant.Value.Name</label>
+        <input type="radio" id="st@($"1{plant.Key}")" name="subtype" value="@plant.Key" />
+    }
 </div>
 <div data-tier="2">
-    <label for="st21">Oak</label>
-    <input type="radio" id="st21" name="subtype" value="1" />
-    <label for="st22">Birch</label>
-    <input type="radio" id="st22" name="subtype" value="2" />
-    <label for="st23">Maple</label>
-    <input type="radio" id="st23" name="subtype" value="3" />
+    @foreach (var plant in worldItemsRepo.GetLandPlantsByTier(LandTypes.Grass, 2))
+    {
+        <label for="st@($"2{plant.Key}")">@plant.Value.Name</label>
+        <input type="radio" id="st@($"2{plant.Key}")" name="subtype" value="@plant.Key" />
+    }
 </div>
 <div data-tier="3">
-    <label for="st31">Oak</label>
-    <input type="radio" id="st31" name="subtype" value="1" />
-    <label for="st32">Birch</label>
-    <input type="radio" id="st32" name="subtype" value="2" />
-    <label for="st33">Maple</label>
-    <input type="radio" id="st33" name="subtype" value="3" />
+    @foreach (var plant in worldItemsRepo.GetLandPlantsByTier(LandTypes.Grass, 3))
+    {
+        <label for="st@($"3{plant.Key}")">@plant.Value.Name</label>
+        <input type="radio" id="st@($"3{plant.Key}")" name="subtype" value="@plant.Key" />
+    }
 </div>
 
 <style>
