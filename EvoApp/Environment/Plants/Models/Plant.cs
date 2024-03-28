@@ -1,21 +1,27 @@
-﻿using EvoApp.Interfaces;
+﻿using EvoApp.DTOs;
+using EvoApp.Interfaces;
 using EvoApp.Models;
 
 namespace EvoApp.Environment.Plants.Models
 {
-	public abstract class Plant(string name, int category, Func<LiveState, string?, bool> evolvePredicate)
+	public abstract class Plant(string name, int category, Func<WorldObject, string?, object?> evolvePredicate)
         : WorldObject(name), ILive
     {
         public int Category { get; set; } = category;
-		public override LiveState State { get; init; } = new LiveState() { EvolveSchema = evolvePredicate };
+		public override LiveState LiveState { get; init; } = new LiveState();
+		public override EvolveState EvolveState { get; init; } = new EvolveState() { EvolveSchema = evolvePredicate };
+		
 		public override string FullName { get
 			{
-				return $"{(State.Evolved ? State.Prefix : "")} {_name}";
+				return $"{(EvolveState.Evolved ? EvolveState.Prefix : "")} {_name}";
 			}
 		}
-		public override void AdvanceInTime()
+		public override AdvancedDataDTO AdvanceInTime()
 		{
-			State.Age++;
+			LiveState.Age++;
+			var evolveResult = EvolveState.TryEvolve(this);
+
+			return new AdvancedDataDTO(Coordinates, new { LiveState.Age, evolveResult });
 		}
 	}
 }

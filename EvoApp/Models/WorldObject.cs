@@ -1,17 +1,20 @@
-﻿namespace EvoApp.Models
+﻿using EvoApp.DTOs;
+
+namespace EvoApp.Models
 {
 	public abstract class WorldObject(string name)
 	{
 		private Coordinates _coordinates;
 		protected string _name = name;
 		public abstract string FullName { get; }
-		public abstract LiveState State { get; init; }
+		public abstract LiveState LiveState { get; init; }
+		public abstract EvolveState EvolveState { get; init; }
 		public Coordinates Coordinates {
 			get { return _coordinates; }
 			set {
 				// TODO - coordinates checks
 				_coordinates = value;
 			} }
-		public abstract void AdvanceInTime();
+		public abstract AdvancedDataDTO AdvanceInTime();
     }
 }

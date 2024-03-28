@@ -4,6 +4,6 @@ namespace EvoApp.Interfaces
 {
 	public interface ILive
 	{
-		public LiveState State { get; init; }
+		public LiveState LiveState { get; init; }
     }
 }

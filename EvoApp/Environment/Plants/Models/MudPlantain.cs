@@ -2,7 +2,7 @@
 
 namespace EvoApp.Environment.Plants.Models
 {
-	public class MudPlantain(string name, int category, Func<LiveState, string?, bool> evolvePredicate)
+	public class MudPlantain(string name, int category, Func<WorldObject, string?, object?> evolvePredicate)
 		: Plant(name, category, evolvePredicate)
 	{
 	}

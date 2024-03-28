@@ -14,7 +14,7 @@ namespace EvoApp.Services
 		private ConcurrentDictionary<WorldObject, bool> _lives = [];
 
 		public LifeTime(IHubContext<LandHub> landHubContext) {
-			_timer = new PeriodicTimer(TimeSpan.FromSeconds(1));
+			_timer = new PeriodicTimer(TimeSpan.FromMilliseconds(500));
 			_landHubContext = landHubContext;
 			Start();
 		}
@@ -36,14 +36,10 @@ namespace EvoApp.Services
             {
                 foreach (var live in _lives)
                 {
-					live.Key.AdvanceInTime();
-					
-					if (live.Key.State.TryEvolve())
-					{
-						await _landHubContext.Clients.All.SendAsync("Evolve", new UpdateDTO(live.Key.Coordinates, new { live.Key.FullName }));
-					}
+					var advanceData = live.Key.AdvanceInTime();
+					await _landHubContext.Clients.All.SendAsync("Evolve", advanceData);
 
-					await _landHubContext.Clients.All.SendAsync("Grow", live.Key);
+					//await _landHubContext.Clients.All.SendAsync("Grow", live.Key);
 				}
             }
         }
