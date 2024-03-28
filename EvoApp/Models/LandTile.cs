@@ -15,5 +15,9 @@ namespace EvoApp.Models
 		{
 			TileGrid[tileY,tileX] = null;
 		}
+		public bool CanPlaceItem(int tileX, int tileY)
+		{
+			return TileGrid[tileY, tileX] is null;
+		}
 	}
 }

@@ -20,15 +20,22 @@ namespace EvoApp.Hubs
 			int landX, int landY,
 			int tileX, int tileY)
 		{
+
 			LandTile landTile = land.GetLandTile(landX, landY);
+			if (!landTile.CanPlaceItem(tileX, tileY))
+			{
+				return;
+			}
 			PlantFactoryBase plantFabric = worldObjectFabric.GetPlantFabric(landTile.LandType);
 
             Plant plant = plantFabric.Tier(tierId, subtypeId);
 
 			Coordinates coordinates = new(landX, landY, tileX, tileY);
 			plant.Coordinates = coordinates;
+
             life.AddToLiving(plant);
 			landTile.PlaceItem(plant, tileX, tileY);
+
             Clients.All.SendAsync("PlacedItem", new { name = plant.FullName, landX, landY, tileX, tileY });
         }
 	}
