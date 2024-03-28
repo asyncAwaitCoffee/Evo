@@ -1,7 +1,5 @@
 ﻿using EvoApp.DTOs;
 using EvoApp.Enums;
-using EvoApp.Environment.Plants.Models;
-using System.Collections.Immutable;
 
 namespace EvoApp.Repositories
 {
@@ -117,8 +115,6 @@ namespace EvoApp.Repositories
                     {
 						yield return plant.Value;
                     }
-
-
                 }
             }
         }

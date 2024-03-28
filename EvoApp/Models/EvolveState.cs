@@ -1,18 +1,22 @@
-﻿using System.Text.Json.Serialization;
-
-namespace EvoApp.Models
+﻿namespace EvoApp.Models
 {
 	public class EvolveState
 	{
 		public bool Evolved { get; set; } = false;
 		public string Prefix { get; set; } = "";
-		[JsonIgnore]
-		public Func<WorldObject, string?, object?>? EvolveSchema { get; set; }
+		public Func<WorldObject, object?>? EvolveSchema { get; set; }
 		public object? TryEvolve(WorldObject worldObject)
 		{
 			if (EvolveSchema is not null)
 			{
-				return EvolveSchema(worldObject, null);
+				var result = EvolveSchema(worldObject);
+
+				if (Evolved)
+				{
+					worldObject.EvolveState.EvolveSchema = null;
+				}
+
+				return result;
 			}
 			return null;
 		}
