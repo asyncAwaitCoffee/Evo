@@ -1,4 +1,5 @@
-﻿using EvoApp.Hubs;
+﻿using EvoApp.DTOs;
+using EvoApp.Hubs;
 using EvoApp.Interfaces;
 using EvoApp.Models;
 using Microsoft.AspNetCore.SignalR;
@@ -39,7 +40,7 @@ namespace EvoApp.Services
 					
 					if (live.Key.State.TryEvolve())
 					{
-						await _landHubContext.Clients.All.SendAsync("Evolve", live.Key);
+						await _landHubContext.Clients.All.SendAsync("Evolve", new UpdateDTO(live.Key.Coordinates, new { live.Key.FullName }));
 					}
 
 					await _landHubContext.Clients.All.SendAsync("Grow", live.Key);
