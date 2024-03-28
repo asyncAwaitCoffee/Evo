@@ -14,9 +14,12 @@
 				@for (int x = 0; x < landTile.TileGrid.GetLength(1); x++)
 				{
 					<div data-tile-x="@x" data-tile-y="@y">
-						<div class="item-name">@landTile.TileGrid[y, x]?.FullName</div>
-						<div class="item-age">@landTile.TileGrid[y, x]?.LiveState.Age</div>
-						<button class="b-collect">Collect</button>
+						@if (landTile.TileGrid[y, x] is not null)
+						{
+							<div class="item-name">@landTile.TileGrid[y, x]!.FullName</div>
+							<div class="item-age">@landTile.TileGrid[y, x]!.LiveState.Age</div>
+							<button class="b-collect">Collect</button>
+						}
 					</div>
 				}
 			}
