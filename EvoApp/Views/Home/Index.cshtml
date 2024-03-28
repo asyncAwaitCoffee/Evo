@@ -50,27 +50,7 @@
 					parseInt(tier), parseInt(subtype.value), parseInt(landX, 10), parseInt(landY), parseInt(tileX, 10), parseInt(tileY, 10));
 			}))
 
-		hubConnection.on("PlacedItem", item => {
-			// TODO - display recieved info: name, image...
-
-			const itemName = document.createElement("div");
-			itemName.classList.add("item-name");
-			itemName.textContent = item.name;
-
-			const itemAge = document.createElement("div");
-			itemAge.classList.add("item-age");
-
-			const bCollect = document.createElement("button");
-			bCollect.textContent = "Collect";
-			bCollect.classList.add("b-collect");
-
-			document
-				.querySelector(`[data-land-x="${item.landX}"][data-land-y="${item.landY}"]`)
-				.querySelector(`[data-tile-x="${item.tileX}"][data-tile-y="${item.tileY}"]`)
-				.append(itemName, itemAge, bCollect);
-			
-		
-		});
+		hubConnection.on("PlacedItem", item => createPlacedItemHTML(item));
 
 		hubConnection.on("Grow", item => {
 			console.log(item);
@@ -101,6 +81,26 @@
 		})
 
 		hubConnection.start().then(() => { console.log("Socket connected!") });
+
+		function createPlacedItemHTML(item) {
+			// TODO - display recieved info: name, image...
+
+			const itemName = document.createElement("div");
+			itemName.classList.add("item-name");
+			itemName.textContent = item.name;
+
+			const itemAge = document.createElement("div");
+			itemAge.classList.add("item-age");
+
+			const bCollect = document.createElement("button");
+			bCollect.textContent = "Collect";
+			bCollect.classList.add("b-collect");
+
+			document
+				.querySelector(`[data-land-x="${item.landX}"][data-land-y="${item.landY}"]`)
+				.querySelector(`[data-tile-x="${item.tileX}"][data-tile-y="${item.tileY}"]`)
+				.append(itemName, itemAge, bCollect);
+		}
 
 	</script>
 }
