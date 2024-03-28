@@ -32,7 +32,7 @@ namespace EvoApp.Hubs
 
             Plant plant = plantFabric.Tier(tierId, subtypeId);
 			plant.AddEvolveSchema(evolve.Aged(10 * tierId));
-			plant.AddEvolveSchema(evolve.Eternity(11 * tierId));
+			plant.AddEvolveSchema(evolve.Eternity(10 * tierId + 5));
 
 			Coordinates coordinates = new(landX, landY, tileX, tileY);
 			plant.Coordinates = coordinates;
