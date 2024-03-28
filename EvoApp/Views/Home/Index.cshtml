@@ -52,11 +52,18 @@
 
 		hubConnection.on("PlacedItem", item => {
 			// TODO - display recieved info: name, image...
+
+			const itemName = document.createElement("div");
+			itemName.classList.add("item-name");
+			itemName.textContent = item.name;
+
+			const itemAge = document.createElement("div");
+			itemAge.classList.add("item-age");
+
 			document
 				.querySelector(`[data-land-x="${item.landX}"][data-land-y="${item.landY}"]`)
 				.querySelector(`[data-tile-x="${item.tileX}"][data-tile-y="${item.tileY}"]`)
-				.querySelector(".item-name")
-				.textContent = item.name;
+				.append(itemName, itemAge);
 			
 		
 		});
