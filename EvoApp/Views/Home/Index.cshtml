@@ -60,10 +60,14 @@
 			const itemAge = document.createElement("div");
 			itemAge.classList.add("item-age");
 
+			const bCollect = document.createElement("button");
+			bCollect.textContent = "Collect";
+			bCollect.classList.add("b-collect");
+
 			document
 				.querySelector(`[data-land-x="${item.landX}"][data-land-y="${item.landY}"]`)
 				.querySelector(`[data-tile-x="${item.tileX}"][data-tile-y="${item.tileY}"]`)
-				.append(itemName, itemAge);
+				.append(itemName, itemAge, bCollect);
 			
 		
 		});
