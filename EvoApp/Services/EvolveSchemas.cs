@@ -2,7 +2,7 @@
 
 namespace EvoApp.Services
 {
-	public class EvolveShemas
+	public class EvolveSchemas
 	{
 		public Func<LiveState, string?, bool> Age(int age)
 		{

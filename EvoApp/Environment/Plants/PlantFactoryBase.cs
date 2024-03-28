@@ -6,9 +6,9 @@ namespace EvoApp.Environment.Plants
 {
 	public abstract class PlantFactoryBase
 	{
-		protected readonly EvolveShemas _evolveShemas;
+		protected readonly EvolveSchemas _evolveShemas;
 		protected readonly IWorldItemsRepo _worldItems;
-		public PlantFactoryBase(EvolveShemas evolveShemas, IWorldItemsRepo worldItems)
+		public PlantFactoryBase(EvolveSchemas evolveShemas, IWorldItemsRepo worldItems)
 		{
 			_evolveShemas = evolveShemas;
 			_worldItems = worldItems;

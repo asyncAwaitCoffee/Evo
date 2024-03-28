@@ -7,11 +7,15 @@ namespace EvoApp.Environment.Plants.Models
         : WorldObject(name), ILive
     {
         public int Category { get; set; } = category;
-		public LiveState State { get; init; } = new LiveState() { EvolveSchema = evolvePredicate };
+		public override LiveState State { get; init; } = new LiveState() { EvolveSchema = evolvePredicate };
 		public override string FullName { get
 			{
 				return $"{(State.Evolved ? State.Prefix : "")} {_name}";
 			}
-		}         
+		}
+		public override void AdvanceInTime()
+		{
+			State.Age++;
+		}
 	}
 }

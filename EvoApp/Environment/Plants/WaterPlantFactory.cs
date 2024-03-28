@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EvoApp.Environment.Plants
 {
-	public class WaterPlantFactory([FromServices] EvolveShemas evolveShemas, [FromServices] IWorldItemsRepo worldItems)
+	public class WaterPlantFactory([FromServices] EvolveSchemas evolveShemas, [FromServices] IWorldItemsRepo worldItems)
 		: PlantFactoryBase(evolveShemas, worldItems)
 	{
 		public override Plant TierOne(int subtypeId)

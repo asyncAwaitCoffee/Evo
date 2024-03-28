@@ -1,6 +1,4 @@
-﻿using EvoApp.Interfaces;
-
-namespace EvoApp.Models
+﻿namespace EvoApp.Models
 {
 	public abstract class WorldObject(string name)
 	{
@@ -10,8 +8,10 @@ namespace EvoApp.Models
         public Coordinates Coordinates {
 			get { return _coordinates; }
 			set {
-				// TODO - checks
+				// TODO - coordinates checks
 				_coordinates = value;
 			} }
+		public abstract LiveState State { get; init; }
+		public abstract void AdvanceInTime();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using EvoApp.Hubs;
 using EvoApp.Interfaces;
+using EvoApp.Models;
 using Microsoft.AspNetCore.SignalR;
 using System.Collections.Concurrent;
 
@@ -9,7 +10,7 @@ namespace EvoApp.Services
 	{
 		private PeriodicTimer _timer;
 		private IHubContext<LandHub> _landHubContext;
-		private ConcurrentDictionary<ILive, bool> _lives = [];
+		private ConcurrentDictionary<WorldObject, bool> _lives = [];
 
 		public LifeTime(IHubContext<LandHub> landHubContext) {
 			_timer = new PeriodicTimer(TimeSpan.FromSeconds(1));
@@ -17,12 +18,12 @@ namespace EvoApp.Services
 			Start();
 		}
 
-		public void AddToLiving(ILive live, bool evolved = false)
+		public void AddToLiving(WorldObject live, bool evolved = false)
 		{
 			_lives.TryAdd(live, evolved);
 		}
 
-		public void RemoveFromLiving(ILive live)
+		public void RemoveFromLiving(WorldObject live)
 		{
 			_lives.TryRemove(live, out _);
 		}
@@ -34,11 +35,13 @@ namespace EvoApp.Services
             {
                 foreach (var live in _lives)
                 {
-					live.Key.Grow();
-					if (!live.Value)
+					live.Key.AdvanceInTime();
+					
+					if (live.Key.State.TryEvolve())
 					{
-						live.Key.State.TryEvolve();
+						await _landHubContext.Clients.All.SendAsync("Evolve", live.Key);
 					}
+
 					await _landHubContext.Clients.All.SendAsync("Grow", live.Key);
 				}
             }

@@ -66,6 +66,15 @@
 				.textContent = item.state.age;
 		})
 
+		hubConnection.on("Evolve", item => {
+			console.log(item);
+			document
+				.querySelector(`[data-land-x="${item.coordinates.landX}"][data-land-y="${item.coordinates.landY}"]`)
+				.querySelector(`[data-tile-x="${item.coordinates.tileX}"][data-tile-y="${item.coordinates.tileY}"]`)
+				.querySelector(".item-name")
+				.textContent = item.fullName;
+		})
+
 		hubConnection.start().then(() => { console.log("Socket connected!") });
 
 	</script>
