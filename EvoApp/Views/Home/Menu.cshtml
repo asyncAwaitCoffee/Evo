@@ -2,7 +2,6 @@
 @using EvoApp.Enums
 @inject IWorldItemsRepo worldItemsRepo
 
-
 @foreach (var plant in worldItemsRepo.GetPlants())
 {
     <div class="plant-item" data-tier="@plant.tier">

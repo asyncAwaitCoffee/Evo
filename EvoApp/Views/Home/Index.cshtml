@@ -1,6 +1,7 @@
 ﻿@using EvoApp.Models
 @using EvoApp.Services
 @inject LandMap landMap
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 @{
 	ViewBag.Title = "Index";
@@ -28,14 +29,15 @@
 </div>
 
 @section lib {
-	<script src="lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+	<script src="lib/microsoft/signalr/dist/browser/signalr.min.js" asp-append-version="true"></script>
+	<script src="scripts/home/index.js" asp-append-version="true"></script>
 }
 @section style {
-	<link href="~/styles/home/index.css" rel="stylesheet" />
+	<link href="~/styles/home/index.css" rel="stylesheet" asp-append-version="true" />
 }
 
 @section script {
-	<script>
+	<script asp-append-version="true">
 		const hubConnection = new signalR.HubConnectionBuilder().withUrl("/land").build();
 
 		[...document.getElementsByClassName("land-tile")]
@@ -54,53 +56,26 @@
 
 		hubConnection.on("Grow", item => {
 			console.log(item);
-			document
-				.querySelector(`[data-land-x="${item.coordinates.landX}"][data-land-y="${item.coordinates.landY}"]`)
-				.querySelector(`[data-tile-x="${item.coordinates.tileX}"][data-tile-y="${item.coordinates.tileY}"]`)
-				.querySelector(".item-age")
+			const tile = selectTileByCoordinates(item.coordinates);
+
+			tile.querySelector(".item-age")
 				.textContent = item.state.age;
 		})
 
 		hubConnection.on("Evolve", item => {
 			console.log(item);
-			console.log(item.updateData.age);
+			const tile = selectTileByCoordinates(item.coordinates);
 
-			document
-				.querySelector(`[data-land-x="${item.coordinates.landX}"][data-land-y="${item.coordinates.landY}"]`)
-				.querySelector(`[data-tile-x="${item.coordinates.tileX}"][data-tile-y="${item.coordinates.tileY}"]`)
-				.querySelector(".item-age")
+			tile.querySelector(".item-age")
 				.textContent = item.updateData.age;
 
 			if (item.updateData.evolveResult) {
-				document
-					.querySelector(`[data-land-x="${item.coordinates.landX}"][data-land-y="${item.coordinates.landY}"]`)
-					.querySelector(`[data-tile-x="${item.coordinates.tileX}"][data-tile-y="${item.coordinates.tileY}"]`)
-					.querySelector(".item-name")
+				tile.querySelector(".item-name")
 					.textContent = item.updateData.evolveResult.fullName;
 			}
 		})
 
-		hubConnection.start().then(() => { console.log("Socket connected!") });
-
-		function createPlacedItemHTML(item) {
-			// TODO - display recieved info: name, image...
-
-			const itemName = document.createElement("div");
-			itemName.classList.add("item-name");
-			itemName.textContent = item.name;
-
-			const itemAge = document.createElement("div");
-			itemAge.classList.add("item-age");
-
-			const bCollect = document.createElement("button");
-			bCollect.textContent = "Collect";
-			bCollect.classList.add("b-collect");
-
-			document
-				.querySelector(`[data-land-x="${item.landX}"][data-land-y="${item.landY}"]`)
-				.querySelector(`[data-tile-x="${item.tileX}"][data-tile-y="${item.tileY}"]`)
-				.append(itemName, itemAge, bCollect);
-		}
+		hubConnection.start().then(() => { console.log("Socket connected!") })
 
 	</script>
 }
