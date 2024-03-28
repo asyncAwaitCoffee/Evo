@@ -4,16 +4,17 @@
 	{
 		public bool Evolved { get; set; } = false;
 		public string Prefix { get; set; } = "";
-		public Func<WorldObject, object?>? EvolveSchema { get; set; }
+		public string Postfix { get; set; } = "";
+		public List<Func<WorldObject, object?>> EvolveSchemas { get; set; } = [];
 		public object? TryEvolve(WorldObject worldObject)
 		{
-			if (EvolveSchema is not null)
+			foreach (var evolve in EvolveSchemas)
 			{
-				var result = EvolveSchema(worldObject);
+				var result = evolve(worldObject);
 
-				if (Evolved)
+				if (result is not null)
 				{
-					worldObject.EvolveState.EvolveSchema = null;
+					worldObject.EvolveState.EvolveSchemas.Remove(evolve);
 				}
 
 				return result;

@@ -2,8 +2,8 @@
 
 namespace EvoApp.Environment.Plants.Models
 {
-    public class Bush(string name, int category, Func<WorldObject, object?> evolvePredicate)
-		: Plant(name, category, evolvePredicate)
+    public class Bush(string name, int category)
+		: Plant(name, category)
 	{
     }
 }

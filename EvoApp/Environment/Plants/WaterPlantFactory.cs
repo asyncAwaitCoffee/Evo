@@ -12,19 +12,19 @@ namespace EvoApp.Environment.Plants
 		public override Plant TierOne(int subtypeId)
 		{
 			var (name, info, _, _, _) = _worldItems.GetPlantData(LandTypes.Water, 1, subtypeId);
-			return new Algae(name, subtypeId, _evolveShemas.Age(10));
+			return new Algae(name, subtypeId);
 		}
 
 		public override Plant TierTwo(int subtypeId)
 		{
 			var (name, info, _, _, _) = _worldItems.GetPlantData(LandTypes.Water, 2, subtypeId);
-			return new Algae(name, subtypeId, _evolveShemas.Age(20));
+			return new Algae(name, subtypeId);
 		}
 
 		public override Plant TierThree(int subtypeId)
 		{
 			var (name, info, _, _, _) = _worldItems.GetPlantData(LandTypes.Water, 3, subtypeId);
-			return new Algae(name, subtypeId, _evolveShemas.Age(30));
+			return new Algae(name, subtypeId);
 		}
 	}
 }

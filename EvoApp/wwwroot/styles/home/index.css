@@ -13,8 +13,17 @@
     aspect-ratio: 1;
     gap: 1px;
 }
+
 .land-tile > *:hover {
     filter: brightness(0.9);
+}
+
+.b-collect {
+    display: none;
+}
+
+.land-tile > *:hover .b-collect {
+    display: block;
 }
 
 .Grass {

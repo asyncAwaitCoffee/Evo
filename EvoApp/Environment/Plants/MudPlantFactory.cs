@@ -12,19 +12,19 @@ namespace EvoApp.Environment.Plants
         public override Plant TierOne(int subtypeId)
 		{
 			var (name, info, _, _, _) = _worldItems.GetPlantData(LandTypes.Mud, 1, subtypeId);
-			return new MudPlantain(name, subtypeId, _evolveShemas.Age(10));
+			return new MudPlantain(name, subtypeId);
 		}
 
 		public override Plant TierTwo(int subtypeId)
 		{
 			var (name, info, _, _, _) = _worldItems.GetPlantData(LandTypes.Mud, 2, subtypeId);
-			return new MudPlantain(name, subtypeId, _evolveShemas.Age(20));
+			return new MudPlantain(name, subtypeId);
 		}
 
 		public override Plant TierThree(int subtypeId)
 		{
 			var (name, info, _, _, _) = _worldItems.GetPlantData(LandTypes.Mud, 3, subtypeId);
-			return new MudPlantain(name, subtypeId, _evolveShemas.Age(30));
+			return new MudPlantain(name, subtypeId);
 		}
 	}
 }

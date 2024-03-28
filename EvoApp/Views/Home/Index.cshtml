@@ -15,7 +15,8 @@
 				{
 					<div data-tile-x="@x" data-tile-y="@y">
 						<div class="item-name">@landTile.TileGrid[y, x]?.FullName</div>
-						<div class="item-age"></div>						
+						<div class="item-age">@landTile.TileGrid[y, x]?.LiveState.Age</div>
+						<button class="b-collect">Collect</button>
 					</div>
 				}
 			}
@@ -36,6 +37,7 @@
 
 		[...document.getElementsByClassName("land-tile")]
 			.forEach(land => land.addEventListener("click", (ev) => {
+				// TODO - parentNode depends on element clicked, if text clicked -> error
 				const { landX, landY } = ev.target.parentNode.dataset;
 				const { tileX, tileY } = ev.target.dataset;
 				const subtype = document.querySelector("input[name='subtype']:checked");
@@ -47,7 +49,6 @@
 
 		hubConnection.on("PlacedItem", item => {
 			// TODO - display recieved info: name, image...
-			
 			document
 				.querySelector(`[data-land-x="${item.landX}"][data-land-y="${item.landY}"]`)
 				.querySelector(`[data-tile-x="${item.tileX}"][data-tile-y="${item.tileY}"]`)

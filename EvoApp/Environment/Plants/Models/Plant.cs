@@ -4,16 +4,20 @@ using EvoApp.Models;
 
 namespace EvoApp.Environment.Plants.Models
 {
-	public abstract class Plant(string name, int category, Func<WorldObject, object?> evolvePredicate)
+	public abstract class Plant(string name, int category)
         : WorldObject(name), ILive
     {
         public int Category { get; set; } = category;
 		public override LiveState LiveState { get; init; } = new LiveState();
-		public override EvolveState EvolveState { get; init; } = new EvolveState() { EvolveSchema = evolvePredicate };
-		
+		public override EvolveState EvolveState { get; init; } = new EvolveState();
+		public void AddEvolveSchema(Func<WorldObject, object?> evolveSchema)
+		{
+			EvolveState.EvolveSchemas.Add(evolveSchema);
+		}
+
 		public override string FullName { get
 			{
-				return $"{(EvolveState.Evolved ? EvolveState.Prefix : "")} {_name}";
+				return $"{EvolveState.Prefix} {_name} {EvolveState.Postfix}";
 			}
 		}
 		public override AdvancedDataDTO AdvanceInTime()
