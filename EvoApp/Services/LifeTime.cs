@@ -1,6 +1,5 @@
 ﻿using EvoApp.Hubs;
 using EvoApp.Interfaces;
-using EvoApp.Models;
 using Microsoft.AspNetCore.SignalR;
 using System.Collections.Concurrent;
 
@@ -40,7 +39,7 @@ namespace EvoApp.Services
 					{
 						live.Key.State.TryEvolve();
 					}
-					_landHubContext.Clients.All.SendAsync("Grow", live.Key);
+					await _landHubContext.Clients.All.SendAsync("Grow", live.Key);
 				}
             }
         }

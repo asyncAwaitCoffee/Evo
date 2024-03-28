@@ -1,10 +1,13 @@
-﻿namespace EvoApp.Models
+﻿using EvoApp.Interfaces;
+
+namespace EvoApp.Models
 {
 	public abstract class WorldObject(string name)
 	{
 		private Coordinates _coordinates;
-		public string Name { get; init; } = name;
-		public Coordinates Coordinates {
+		protected string _name = name;
+		public abstract string FullName { get; }
+        public Coordinates Coordinates {
 			get { return _coordinates; }
 			set {
 				// TODO - checks

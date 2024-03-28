@@ -14,7 +14,7 @@
 				@for (int x = 0; x < landTile.TileGrid.GetLength(1); x++)
 				{
 					<div data-tile-x="@x" data-tile-y="@y">
-						<div class="item-name">@landTile.TileGrid[y, x]?.Name</div>
+						<div class="item-name">@landTile.TileGrid[y, x]?.FullName</div>
 						<div class="item-age"></div>						
 					</div>
 				}

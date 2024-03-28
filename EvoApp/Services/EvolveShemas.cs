@@ -4,9 +4,12 @@ namespace EvoApp.Services
 {
 	public class EvolveShemas
 	{
-		public Predicate<LiveState> Age(int age)
+		public Func<LiveState, string?, bool> Age(int age)
 		{
-			return (LiveState liveState) => { return liveState.Age > age; };
+			return (LiveState liveState, string? prefix) => {
+				liveState.Prefix = prefix is null ? "Aged" : prefix;
+				return liveState.Age > age;
+			};
 		}
 	}
 }

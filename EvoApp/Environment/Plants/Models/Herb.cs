@@ -2,7 +2,7 @@
 
 namespace EvoApp.Environment.Plants.Models
 {
-    public class Herb(string name, int category, Predicate<LiveState> evolvePredicate)
+    public class Herb(string name, int category, Func<LiveState, string?, bool> evolvePredicate)
 		: Plant(name, category, evolvePredicate)
 	{
     }
