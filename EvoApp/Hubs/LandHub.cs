@@ -42,5 +42,23 @@ namespace EvoApp.Hubs
 
             Clients.All.SendAsync("PlacedItem", new { name = plant.FullName, landX, landY, tileX, tileY });
         }
+
+		public void GatherPlant(
+			[FromServices] LandMap land,
+			[FromServices] LifeTime life,
+			int landX, int landY,
+			int tileX, int tileY)
+		{
+            Console.WriteLine($"{landX} - {landY} - {tileX} - {tileY}");
+            LandTile landTile = land.GetLandTile(landX, landY);
+			var item = landTile.GetItem(tileX, tileY);
+			if (item is Plant plant)
+			{
+				life.RemoveFromLiving(plant);
+				landTile.RemoveItem(tileX, tileY);
+
+				Clients.All.SendAsync("GatheredItem", new { gathered = plant.GatherContent.Content });
+			}
+		}
 	}
 }

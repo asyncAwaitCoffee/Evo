@@ -14,12 +14,14 @@
 			{
 				@for (int x = 0; x < landTile.TileGrid.GetLength(1); x++)
 				{
-					<div data-tile-x="@x" data-tile-y="@y">
+					<div data-tile-x="@x" data-tile-y="@y" class="grid-tile">
 						@if (landTile.TileGrid[y, x] is not null)
 						{
-							<div class="item-name">@landTile.TileGrid[y, x]!.FullName</div>
-							<div class="item-age">@landTile.TileGrid[y, x]!.LiveState.Age</div>
-							<button class="b-collect">Collect</button>
+							<div>
+								<div class="item-name">@landTile.TileGrid[y, x]!.FullName</div>
+								<div class="item-age">@landTile.TileGrid[y, x]!.LiveState.Age</div>
+								<button class="b-collect">Collect</button>
+							</div>
 						}
 					</div>
 				}
@@ -40,22 +42,43 @@
 	<script asp-append-version="true">
 		const hubConnection = new signalR.HubConnectionBuilder().withUrl("/land").build();
 
-		[...document.getElementsByClassName("land-tile")]
+		[...document.getElementsByClassName("grid-tile")]	
 			.forEach(land => land.addEventListener("click", (ev) => {
 				// TODO - parentNode depends on element clicked, if text clicked -> error
-				const { landX, landY } = ev.target.parentNode.dataset;
-				const { tileX, tileY } = ev.target.dataset;
-				const subtype = document.querySelector("input[name='subtype']:checked");
-				if (!subtype) return;
-				const tier = subtype.parentNode.dataset.tier;
-				hubConnection.invoke("PlacePlant",
-					parseInt(tier), parseInt(subtype.value), parseInt(landX, 10), parseInt(landY), parseInt(tileX, 10), parseInt(tileY, 10));
+				console.log(ev.target);
+				if (ev.target.classList.contains("grid-tile")) {
+
+					const { landX, landY } = ev.target.parentNode.dataset;
+					const { tileX, tileY } = ev.target.dataset;
+					const subtype = document.querySelector("input[name='subtype']:checked");
+
+					if (!subtype) return;
+
+					const tier = subtype.parentNode.dataset.tier;
+					hubConnection.invoke("PlacePlant",
+						parseInt(tier), parseInt(subtype.value),
+						parseInt(landX, 10), parseInt(landY, 10),
+						parseInt(tileX, 10), parseInt(tileY, 10));
+
+				}
+			}));
+
+		[...document.getElementsByClassName("b-collect")]
+			.forEach(collect => collect.addEventListener("click", (ev) => {
+				// TODO - parentNode depends on element clicked, if text clicked -> error
+
+				const { landX, landY } = ev.target.parentNode.parentNode.parentNode.dataset;
+				const { tileX, tileY } = ev.target.parentNode.parentNode.dataset;
+
+				hubConnection.invoke("GatherPlant",
+					parseInt(landX, 10), parseInt(landY, 10),
+					parseInt(tileX, 10), parseInt(tileY, 10));
 			}))
 
 		hubConnection.on("PlacedItem", item => createPlacedItemHTML(item));
+		hubConnection.on("GatheredItem", gathered => console.log(gathered));
 
 		hubConnection.on("Grow", item => {
-			console.log(item);
 			const tile = selectTileByCoordinates(item.coordinates);
 
 			tile.querySelector(".item-age")
@@ -63,7 +86,7 @@
 		})
 
 		hubConnection.on("Evolve", item => {
-			console.log(item);
+			// TODO - seprate update for evolve, live, etc
 			const tile = selectTileByCoordinates(item.coordinates);
 
 			tile.querySelector(".item-age")
