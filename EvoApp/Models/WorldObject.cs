@@ -9,6 +9,7 @@ namespace EvoApp.Models
 		public abstract string FullName { get; }
 		public abstract LiveState LiveState { get; init; }
 		public abstract EvolveState EvolveState { get; init; }
+		public abstract GatherContent GatherContent { get; init; }
 		public Coordinates Coordinates {
 			get { return _coordinates; }
 			set {

@@ -10,6 +10,7 @@ namespace EvoApp.Environment.Plants.Models
         public int Category { get; set; } = category;
 		public override LiveState LiveState { get; init; } = new LiveState();
 		public override EvolveState EvolveState { get; init; } = new EvolveState();
+		public override GatherContent GatherContent { get; init; }
 		public void AddEvolveSchema(Func<WorldObject, object?> evolveSchema)
 		{
 			EvolveState.EvolveSchemas.Add(evolveSchema);
