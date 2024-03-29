@@ -57,7 +57,7 @@ namespace EvoApp.Hubs
 				life.RemoveFromLiving(plant);
 				landTile.RemoveItem(tileX, tileY);
 
-				Clients.All.SendAsync("GatheredItem", new { gathered = plant.GatherContent.Content });
+				Clients.All.SendAsync("GatheredItem", new { gathered = plant.GatherContent.Content, landX, landY, tileX, tileY });
 			}
 		}
 	}

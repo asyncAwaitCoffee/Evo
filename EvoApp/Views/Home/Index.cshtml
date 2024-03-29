@@ -76,7 +76,15 @@
 			}))
 
 		hubConnection.on("PlacedItem", item => createPlacedItemHTML(item));
-		hubConnection.on("GatheredItem", gathered => console.log(gathered));
+		hubConnection.on("GatheredItem", gathered => {
+			console.log(gathered);
+			const { landX, landY, tileX, tileY } = gathered;
+
+			document
+				.querySelector(`[data-land-x="${gathered.landX}"][data-land-y="${gathered.landY}"]`)
+				.querySelector(`[data-tile-x="${gathered.tileX}"][data-tile-y="${gathered.tileY}"]`)
+				.replaceChildren();
+		});
 
 		hubConnection.on("Grow", item => {
 			const tile = selectTileByCoordinates(item.coordinates);
