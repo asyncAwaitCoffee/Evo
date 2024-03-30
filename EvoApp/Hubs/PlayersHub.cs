@@ -5,9 +5,9 @@ namespace EvoApp.Hubs
 {
 	public class PlayersHub : Hub
 	{
-		private readonly PlayersService _players;
+		private readonly PlayerService _players;
 
-		public PlayersHub(PlayersService players)
+		public PlayersHub(PlayerService players)
 		{
 			_players = players;
 		}

@@ -1,4 +1,4 @@
-﻿function createPlacedItemHTML(item) {
+﻿function createPlacedItemHTML(item, landHub) {
 	// TODO - display recieved info: name, image...
 
 	const itemName = document.createElement("div");
@@ -18,7 +18,7 @@
 		const { landX, landY } = ev.target.parentNode.parentNode.parentNode.dataset;
 		const { tileX, tileY } = ev.target.parentNode.parentNode.dataset;
 
-		hubConnection.invoke("GatherPlant",
+		landHub.invoke("GatherPlant",
 			parseInt(landX, 10), parseInt(landY, 10),
 			parseInt(tileX, 10), parseInt(tileY, 10));
 	});

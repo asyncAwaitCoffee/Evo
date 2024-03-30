@@ -15,8 +15,8 @@ namespace EvoApp
 			var builder = WebApplication.CreateBuilder(args);
 			builder.Services.AddControllersWithViews();
 			builder.Services.AddSignalR();
-			builder.Services.AddSingleton<PlayersService>();
-			builder.Services.AddSingleton<LandMap>();
+			builder.Services.AddSingleton<PlayerService>();
+			builder.Services.AddSingleton<LandService>();
 			builder.Services.AddSingleton<LifeTime>();
 			builder.Services.AddSingleton<EvolveSchemas>();
 			builder.Services.AddSingleton<IWorldItemsRepo, WorldItemsRepo>();

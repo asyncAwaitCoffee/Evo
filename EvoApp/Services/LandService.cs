@@ -3,7 +3,7 @@ using EvoApp.Models;
 
 namespace EvoApp.Services
 {
-    public class LandMap
+    public class LandService
     {
 		// TODO - switch to array of arrays
 		public LandTile[,] LandTiles { get; init; } = {

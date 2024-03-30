@@ -12,7 +12,7 @@ namespace EvoApp.Hubs
     public class LandsHub : Hub
 	{
 		public void PlacePlant(
-			[FromServices] LandMap land,
+			[FromServices] LandService land,
 			[FromServices] LifeTime life,
 			[FromServices] LivingSpeciesFactory worldObjectFabric,
 			[FromServices] EvolveSchemas evolve,
@@ -44,9 +44,9 @@ namespace EvoApp.Hubs
         }
 
 		public void GatherPlant(
-			[FromServices] LandMap land,
+			[FromServices] LandService land,
 			[FromServices] LifeTime life,
-			[FromServices] PlayersService players,
+			[FromServices] PlayerService players,
 			int landX, int landY,
 			int tileX, int tileY)
 		{
@@ -59,10 +59,7 @@ namespace EvoApp.Hubs
 
 				var gathered = plant.GatherContent.Gather();
 				// TODO - real player id | real gathering
-				if (players.Players.TryGetValue(1, out var player))
-				{
-					player.Score += gathered.Sum();
-				}
+				players.TryScore(1, gathered.Sum());
 
 				Clients.All.SendAsync("GatheredItem", new { gathered, landX, landY, tileX, tileY });
 			}

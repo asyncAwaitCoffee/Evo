@@ -1,6 +1,6 @@
 ﻿@using EvoApp.Models
 @using EvoApp.Services
-@inject LandMap landMap
+@inject LandService landMap
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 <div id="land-field">
@@ -37,7 +37,8 @@
 
 @section script {
 	<script asp-append-version="true">
-		const hubConnection = new signalR.HubConnectionBuilder().withUrl("/land").build();
+		const landHub = new signalR.HubConnectionBuilder().withUrl("/land").build();
+		const playerHub = new signalR.HubConnectionBuilder().withUrl("/player").build();
 
 		[...document.getElementsByClassName("grid-tile")]	
 			.forEach(land => land.addEventListener("click", (ev) => {
@@ -52,7 +53,7 @@
 					if (!subtype) return;
 
 					const tier = subtype.parentNode.dataset.tier;
-					hubConnection.invoke("PlacePlant",
+					landHub.invoke("PlacePlant",
 						parseInt(tier), parseInt(subtype.value),
 						parseInt(landX, 10), parseInt(landY, 10),
 						parseInt(tileX, 10), parseInt(tileY, 10));
@@ -67,13 +68,13 @@
 				const { landX, landY } = ev.target.parentNode.parentNode.parentNode.dataset;
 				const { tileX, tileY } = ev.target.parentNode.parentNode.dataset;
 
-				hubConnection.invoke("GatherPlant",
+				landHub.invoke("GatherPlant",
 					parseInt(landX, 10), parseInt(landY, 10),
 					parseInt(tileX, 10), parseInt(tileY, 10));
 			}))
 
-		hubConnection.on("PlacedItem", item => createPlacedItemHTML(item));
-		hubConnection.on("GatheredItem", gathered => {
+		landHub.on("PlacedItem", item => createPlacedItemHTML(item, landHub));
+		landHub.on("GatheredItem", gathered => {
 			console.log(gathered);
 			const { landX, landY, tileX, tileY } = gathered;
 
@@ -83,14 +84,14 @@
 				.replaceChildren();
 		});
 
-		hubConnection.on("Grow", item => {
+		landHub.on("Grow", item => {
 			const tile = selectTileByCoordinates(item.coordinates);
 
 			tile.querySelector(".item-age")
 				.textContent = item.state.age;
 		})
 
-		hubConnection.on("Evolve", item => {
+		landHub.on("Evolve", item => {
 			// TODO - seprate update for evolve, live, etc
 			const tile = selectTileByCoordinates(item.coordinates);
 
@@ -103,7 +104,13 @@
 			}
 		})
 
-		hubConnection.start().then(() => { console.log("Socket connected!") })
+		playerHub.on("Score", data => {
+			console.log(data);
+			document.getElementById("score").textContent = data.score;
+		})
+
+		landHub.start().then(() => { console.log("Land Socket connected!") })
+		playerHub.start().then(() => { console.log("Player Socket connected!") })
 
 	</script>
 }
