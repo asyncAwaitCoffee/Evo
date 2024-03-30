@@ -22,7 +22,7 @@ namespace EvoApp
 			builder.Services.AddKeyedSingleton<PlantFactoryBase, GrasslandPlantFactory>("Grassland");
 			builder.Services.AddKeyedSingleton<PlantFactoryBase, WaterPlantFactory>("Water");
 			builder.Services.AddKeyedSingleton<PlantFactoryBase, MudPlantFactory>("Mud");
-			builder.Services.AddSingleton<WorldObjectFactory>();
+			builder.Services.AddSingleton<LivingSpeciesFactory>();
 
 			var app = builder.Build();
 

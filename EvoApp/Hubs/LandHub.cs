@@ -14,7 +14,7 @@ namespace EvoApp.Hubs
 		public void PlacePlant(
 			[FromServices] LandMap land,
 			[FromServices] LifeTime life,
-			[FromServices] WorldObjectFactory worldObjectFabric,
+			[FromServices] LivingSpeciesFactory worldObjectFabric,
 			[FromServices] EvolveSchemas evolve,
 			int tierId,
 			int subtypeId,

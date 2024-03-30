@@ -5,9 +5,9 @@ namespace EvoApp.Services
 {
 	public class EvolveSchemas
 	{
-		public Func<WorldObject, object?> Aged(int age)
+		public Func<LivingSpecie, object?> Aged(int age)
 		{
-			return (WorldObject worldObject) => {
+			return (LivingSpecie worldObject) => {
 				if (worldObject.LiveState.Age >= age)
 				{
 					worldObject.EvolveState.Prefix = "Aged";
@@ -17,9 +17,9 @@ namespace EvoApp.Services
 				return null;
 			};
 		}
-		public Func<WorldObject, object?> Eternity(int age)
+		public Func<LivingSpecie, object?> Eternity(int age)
 		{
-			return (WorldObject worldObject) => {
+			return (LivingSpecie worldObject) => {
 				if (worldObject.LiveState.Age >= age)
 				{
 					worldObject.EvolveState.Postfix = "of Eternity";

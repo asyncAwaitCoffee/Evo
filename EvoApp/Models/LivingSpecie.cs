@@ -2,14 +2,14 @@
 
 namespace EvoApp.Models
 {
-	public abstract class WorldObject(string name)
+	public abstract class LivingSpecie(string name)
 	{
 		private Coordinates _coordinates = Coordinates.Default;
 		protected string _name = name;
 		public abstract string FullName { get; }
-		public abstract LiveState LiveState { get; init; }
-		public abstract EvolveState EvolveState { get; init; }
-		public abstract GatherContent GatherContent { get; init; }
+		public abstract required LiveState LiveState { get; init; }
+		public abstract required EvolveState EvolveState { get; init; }
+		public abstract required GatherContent GatherContent { get; init; }
 		public Coordinates Coordinates {
 			get { return _coordinates; }
 			set {
@@ -17,5 +17,6 @@ namespace EvoApp.Models
 				_coordinates = value;
 			} }
 		public abstract AdvancedDataDTO AdvanceInTime();
-    }
+		public abstract void AddEvolveSchema(Func<LivingSpecie, object?> evolveSchema);
+	}
 }

@@ -11,7 +11,7 @@ namespace EvoApp.Services
 	{
 		private PeriodicTimer _timer;
 		private IHubContext<LandHub> _landHubContext;
-		private ConcurrentDictionary<WorldObject, bool> _lives = [];
+		private ConcurrentDictionary<LivingSpecie, bool> _lives = [];
 
 		public LifeTime(IHubContext<LandHub> landHubContext) {
 			_timer = new PeriodicTimer(TimeSpan.FromMilliseconds(500));
@@ -19,12 +19,12 @@ namespace EvoApp.Services
 			Start();
 		}
 
-		public void AddToLiving(WorldObject live, bool evolved = false)
+		public void AddToLiving(LivingSpecie live, bool evolved = false)
 		{
 			_lives.TryAdd(live, evolved);
 		}
 
-		public void RemoveFromLiving(WorldObject live)
+		public void RemoveFromLiving(LivingSpecie live)
 		{
 			_lives.TryRemove(live, out _);
 		}

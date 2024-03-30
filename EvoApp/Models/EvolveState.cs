@@ -5,8 +5,8 @@
 		public bool Evolved { get; set; } = false;
 		public string Prefix { get; set; } = "";
 		public string Postfix { get; set; } = "";
-		public List<Func<WorldObject, object?>> EvolveSchemas { get; set; } = [];
-		public object? TryEvolve(WorldObject worldObject)
+		public List<Func<LivingSpecie, object?>> EvolveSchemas { get; set; } = [];
+		public object? TryEvolve(LivingSpecie worldObject)
 		{
 			foreach (var evolve in EvolveSchemas)
 			{

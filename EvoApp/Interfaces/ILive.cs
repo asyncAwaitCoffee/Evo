@@ -6,6 +6,6 @@ namespace EvoApp.Interfaces
 	{
 		public LiveState LiveState { get; init; }
 		public EvolveState EvolveState { get; init; }
-		public void AddEvolveSchema(Func<WorldObject, object?> evolveSchema);
+		public void AddEvolveSchema(Func<LivingSpecie, object?> evolveSchema);
     }
 }

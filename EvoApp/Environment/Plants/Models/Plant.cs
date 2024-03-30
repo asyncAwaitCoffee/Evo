@@ -1,17 +1,15 @@
 ﻿using EvoApp.DTOs;
-using EvoApp.Enums;
-using EvoApp.Interfaces;
 using EvoApp.Models;
 
 namespace EvoApp.Environment.Plants.Models
 {
-	public class Plant : WorldObject, ILive
+	public class Plant : LivingSpecie
     {
         public int Category { get; set; }
-		public override LiveState LiveState { get; init; } = new LiveState();
-		public override EvolveState EvolveState { get; init; } = new EvolveState();
-		public override GatherContent GatherContent { get; init; } = new GatherContent();
-		public void AddEvolveSchema(Func<WorldObject, object?> evolveSchema)
+		public override required LiveState LiveState { get; init; }
+		public override required EvolveState EvolveState { get; init; }
+		public override required GatherContent GatherContent { get; init; }
+		public override void AddEvolveSchema(Func<LivingSpecie, object?> evolveSchema)
 		{
 			EvolveState.EvolveSchemas.Add(evolveSchema);
 		}
@@ -36,7 +34,11 @@ namespace EvoApp.Environment.Plants.Models
 
 		public static Plant CreatePlant(string name, int category)
 		{
-			return new Plant(name, category);
+			return new Plant(name, category) {
+				LiveState = new(),
+				EvolveState = new(),
+				GatherContent = new()
+			};
 		}
 	}
 }

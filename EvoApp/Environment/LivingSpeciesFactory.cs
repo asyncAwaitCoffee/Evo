@@ -3,13 +3,13 @@ using EvoApp.Environment.Plants;
 
 namespace EvoApp.Environment
 {
-	public class WorldObjectFactory
+	public class LivingSpeciesFactory
 	{
 		private readonly PlantFactoryBase _grasslandPlantFabric;
 		private readonly PlantFactoryBase _waterPlantFabric;
 		private readonly PlantFactoryBase _mudPlantFabric;
 
-		public WorldObjectFactory(
+		public LivingSpeciesFactory(
 			[FromKeyedServices("Grassland")] PlantFactoryBase grasslandPlantFabric,
 			[FromKeyedServices("Water")] PlantFactoryBase waterPlantFabric,
 			[FromKeyedServices("Mud")] PlantFactoryBase mudPlantFabric
