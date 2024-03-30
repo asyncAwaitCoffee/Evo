@@ -46,10 +46,10 @@ namespace EvoApp.Hubs
 		public void GatherPlant(
 			[FromServices] LandMap land,
 			[FromServices] LifeTime life,
+			[FromServices] PlayersService players,
 			int landX, int landY,
 			int tileX, int tileY)
 		{
-            Console.WriteLine($"{landX} - {landY} - {tileX} - {tileY}");
             LandTile landTile = land.GetLandTile(landX, landY);
 			var item = landTile.GetItem(tileX, tileY);
 			if (item is Plant plant)
@@ -57,7 +57,14 @@ namespace EvoApp.Hubs
 				life.RemoveFromLiving(plant);
 				landTile.RemoveItem(tileX, tileY);
 
-				Clients.All.SendAsync("GatheredItem", new { gathered = plant.GatherContent.Gather(), landX, landY, tileX, tileY });
+				var gathered = plant.GatherContent.Gather();
+				// TODO - real player id | real gathering
+				if (players.Players.TryGetValue(1, out var player))
+				{
+					player.Score += gathered.Sum();
+				}
+
+				Clients.All.SendAsync("GatheredItem", new { gathered, landX, landY, tileX, tileY });
 			}
 		}
 	}

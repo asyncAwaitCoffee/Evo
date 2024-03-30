@@ -1,1 +1,9 @@
-﻿<div>Player Panel</div>
+﻿@using EvoApp.Player
+@using EvoApp.Services
+@inject PlayersService players
+
+<div>Player Panel</div>
+@if (players.Players.TryGetValue(1, out PlayerEntity player))
+{
+	<div id="score">@player.Score</div>
+}
