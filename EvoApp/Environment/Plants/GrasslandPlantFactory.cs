@@ -6,25 +6,26 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EvoApp.Environment.Plants
 {
-    public class GrasslandPlantFactory([FromServices] EvolveSchemas evolveShemas, [FromServices] IWorldItemsRepo worldItems)
+    public class GrasslandPlantFactory([FromServices] EvolveSchemas evolveShemas,
+									   [FromServices] IWorldItemsRepo worldItems)
 		: PlantFactoryBase(evolveShemas, worldItems)
 	{
 		public override Plant TierOne(int subtypeId)
 		{
 			var (name, info, _, _, _) = _worldItems.GetPlantData(LandTypes.Grass, 1, subtypeId);
-			return new Herb(name, subtypeId);
+			return Plant.CreatePlant(name, subtypeId);
 		}
 
 		public override Plant TierTwo(int subtypeId)
 		{
 			var (name, info, _, _, _) = _worldItems.GetPlantData(LandTypes.Grass, 2, subtypeId);
-			return new Bush(name, subtypeId);
+			return Plant.CreatePlant(name, subtypeId);
 		}
 
 		public override Plant TierThree(int subtypeId)
 		{
 			var (name, info, _, _, _) = _worldItems.GetPlantData(LandTypes.Grass, 3, subtypeId);
-			return new Tree(name, subtypeId);
+			return Plant.CreatePlant(name, subtypeId);
 		}
 	}
 }

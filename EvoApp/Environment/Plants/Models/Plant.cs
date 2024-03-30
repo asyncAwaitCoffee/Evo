@@ -1,13 +1,13 @@
 ﻿using EvoApp.DTOs;
+using EvoApp.Enums;
 using EvoApp.Interfaces;
 using EvoApp.Models;
 
 namespace EvoApp.Environment.Plants.Models
 {
-	public abstract class Plant(string name, int category)
-        : WorldObject(name), ILive
+	public class Plant : WorldObject, ILive
     {
-        public int Category { get; set; } = category;
+        public int Category { get; set; }
 		public override LiveState LiveState { get; init; } = new LiveState();
 		public override EvolveState EvolveState { get; init; } = new EvolveState();
 		public override GatherContent GatherContent { get; init; } = new GatherContent();
@@ -16,7 +16,12 @@ namespace EvoApp.Environment.Plants.Models
 			EvolveState.EvolveSchemas.Add(evolveSchema);
 		}
 
-		public override string FullName { get
+        private Plant(string name, int category) : base(name)
+		{
+			Category = category;
+		}  
+        
+        public override string FullName { get
 			{
 				return $"{EvolveState.Prefix} {_name} {EvolveState.Postfix}";
 			}
@@ -27,6 +32,11 @@ namespace EvoApp.Environment.Plants.Models
 			var evolveResult = EvolveState.TryEvolve(this);
 
 			return new AdvancedDataDTO(Coordinates, new { LiveState.Age, evolveResult });
+		}
+
+		public static Plant CreatePlant(string name, int category)
+		{
+			return new Plant(name, category);
 		}
 	}
 }
