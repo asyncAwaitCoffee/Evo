@@ -10,6 +10,9 @@
     @RenderSection("style", false)
 </head>
 <body>
+    <header>
+        @await Html.PartialAsync("PlayerPanel")
+    </header>
     <main>
         @RenderBody()
     </main>

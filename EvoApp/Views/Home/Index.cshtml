@@ -3,9 +3,6 @@
 @inject LandMap landMap
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-@{
-	ViewBag.Title = "Index";
-}
 <div id="land-field">
 	@foreach (var landTile in landMap.LandTiles)
 	{

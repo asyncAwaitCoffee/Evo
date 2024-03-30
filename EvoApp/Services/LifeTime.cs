@@ -1,6 +1,4 @@
-﻿using EvoApp.DTOs;
-using EvoApp.Hubs;
-using EvoApp.Interfaces;
+﻿using EvoApp.Hubs;
 using EvoApp.Models;
 using Microsoft.AspNetCore.SignalR;
 using System.Collections.Concurrent;
@@ -10,10 +8,10 @@ namespace EvoApp.Services
 	public class LifeTime
 	{
 		private PeriodicTimer _timer;
-		private IHubContext<LandHub> _landHubContext;
+		private IHubContext<LandsHub> _landHubContext;
 		private ConcurrentDictionary<LivingSpecie, bool> _lives = [];
 
-		public LifeTime(IHubContext<LandHub> landHubContext) {
+		public LifeTime(IHubContext<LandsHub> landHubContext) {
 			_timer = new PeriodicTimer(TimeSpan.FromMilliseconds(500));
 			_landHubContext = landHubContext;
 			Start();

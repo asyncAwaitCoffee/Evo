@@ -15,6 +15,7 @@ namespace EvoApp
 			var builder = WebApplication.CreateBuilder(args);
 			builder.Services.AddControllersWithViews();
 			builder.Services.AddSignalR();
+			builder.Services.AddSingleton<PlayersService>();
 			builder.Services.AddSingleton<LandMap>();
 			builder.Services.AddSingleton<LifeTime>();
 			builder.Services.AddSingleton<EvolveSchemas>();
@@ -45,7 +46,8 @@ namespace EvoApp
 				return Results.Json(new { catName = "Kosha", foodLimit = "Unlimited", result = x });
 			});
 #endif
-			app.MapHub<LandHub>("/land");
+			app.MapHub<LandsHub>("/land");
+			app.MapHub<PlayersHub>("/player");
 
 			app.Run();
 		}

@@ -1,7 +1,11 @@
 ﻿main {
     display: grid;
-    width: 95vmin;
+    width: 80vmin;
     aspect-ratio: 1;
+}
+
+header {
+    height: 10vmin;
 }
 
 aside {
@@ -9,9 +13,11 @@ aside {
     justify-content: flex-start;
     align-content: flex-start;
     flex-wrap: wrap;
-    min-width: 20vmin;
-    width: 10vw;
+    width: 20vmin;
     background-color: black;
+    grid-column: 2 / auto;
+    grid-row: 1 / span 2;
+    overflow: hidden;
 }
 
 .text-Grass {

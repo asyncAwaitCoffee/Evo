@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace EvoApp.Hubs
 {
-    public class LandHub : Hub
+    public class LandsHub : Hub
 	{
 		public void PlacePlant(
 			[FromServices] LandMap land,
@@ -57,7 +57,7 @@ namespace EvoApp.Hubs
 				life.RemoveFromLiving(plant);
 				landTile.RemoveItem(tileX, tileY);
 
-				Clients.All.SendAsync("GatheredItem", new { gathered = plant.GatherContent.Content, landX, landY, tileX, tileY });
+				Clients.All.SendAsync("GatheredItem", new { gathered = plant.GatherContent.Gather(), landX, landY, tileX, tileY });
 			}
 		}
 	}
