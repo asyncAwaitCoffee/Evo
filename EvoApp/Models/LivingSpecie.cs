@@ -4,7 +4,7 @@ namespace EvoApp.Models
 {
 	public abstract class LivingSpecie(string name)
 	{
-		private Coordinates _coordinates = Coordinates.Default;
+		private Coordinates _coordinates = Coordinates.Default();
 		protected string _name = name;
 		public abstract string FullName { get; }
 		public abstract required LiveState LiveState { get; init; }
