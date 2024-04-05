@@ -4,9 +4,9 @@
 
 @foreach (var plant in worldItemsRepo.GetPlants())
 {
-    <div class="plant-item" data-tier="@plant.tier">
-        <label class="text-@plant.landType" for="@($"{plant.landType}-{plant.tier}-{plant.subcategory}")">@plant.Name</label>
-        <input type="radio" id="@($"{plant.landType}-{plant.tier}-{plant.subcategory}")" name="subtype" value="@plant.subcategory" />
+    <div class="plant-item" data-tier="@plant.Tier">
+        <label class="text-@plant.LandType" for="@($"{plant.LandType}-{plant.Tier}-{plant.Subcategory}")">@plant.Name</label>
+        <input type="radio" id="@($"{plant.LandType}-{plant.Tier}-{plant.Subcategory}")" name="subtype" value="@plant.Subcategory" />
     </div>
 }
 

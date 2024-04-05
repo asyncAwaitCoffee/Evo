@@ -15,7 +15,7 @@ namespace EvoApp.Services
 			{ 1, new() },
 		};
 
-		public void TryScore(int playerId, int score)
+		public void TryScore(int playerId, decimal score)
 		{
 			if (Players.TryGetValue(playerId, out PlayerEntity player))
 			{

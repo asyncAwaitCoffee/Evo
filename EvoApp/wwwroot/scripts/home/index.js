@@ -1,6 +1,6 @@
 ﻿function createPlacedItemHTML(item, landHub) {
 	// TODO - display recieved info: name, image...
-
+	console.log(item);
 	const itemName = document.createElement("div");
 	itemName.classList.add("item-name");
 	itemName.textContent = item.name;

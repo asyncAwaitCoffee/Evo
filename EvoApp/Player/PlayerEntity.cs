@@ -1,7 +1,9 @@
-﻿namespace EvoApp.Player
+﻿using System.Text.Json.Serialization;
+
+namespace EvoApp.Player
 {
 	public class PlayerEntity
 	{
-        public int Score { get; set; }
+        public decimal Score { get; set; }
     }
 }

@@ -2,5 +2,5 @@
 
 namespace EvoApp.DTOs
 {
-	public record class PlantDataDTO(string Name, string Info, LandTypes landType, int tier, int subcategory);
+	public record class PlantDataDTO(string Name, string Info, LandTypes LandType, int Tier, int Subcategory, decimal BasePrice);
 }

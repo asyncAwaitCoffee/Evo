@@ -73,7 +73,11 @@
 					parseInt(tileX, 10), parseInt(tileY, 10));
 			}))
 
-		landHub.on("PlacedItem", item => createPlacedItemHTML(item, landHub));
+		landHub.on("PlacedItem", item => {
+			createPlacedItemHTML(item, landHub);
+			document.getElementById("score").textContent = item.score;
+		})
+
 		landHub.on("GatheredItem", gathered => {
 			console.log(gathered);
 			const { landX, landY, tileX, tileY } = gathered;

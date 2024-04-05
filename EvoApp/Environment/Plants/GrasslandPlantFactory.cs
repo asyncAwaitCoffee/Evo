@@ -12,20 +12,20 @@ namespace EvoApp.Environment.Plants
 	{
 		public override Plant TierOne(int subtypeId)
 		{
-			var (name, info, _, _, _) = _worldItems.GetPlantData(LandTypes.Grass, 1, subtypeId);
-			return Plant.CreatePlant(name, subtypeId);
+			var (name, info, _, _, _, price) = _worldItems.GetPlantData(LandTypes.Grass, 1, subtypeId);
+			return Plant.CreatePlant(name, subtypeId, price);
 		}
 
 		public override Plant TierTwo(int subtypeId)
 		{
-			var (name, info, _, _, _) = _worldItems.GetPlantData(LandTypes.Grass, 2, subtypeId);
-			return Plant.CreatePlant(name, subtypeId);
+			var (name, info, _, _, _, price) = _worldItems.GetPlantData(LandTypes.Grass, 2, subtypeId);
+			return Plant.CreatePlant(name, subtypeId, price);
 		}
 
 		public override Plant TierThree(int subtypeId)
 		{
-			var (name, info, _, _, _) = _worldItems.GetPlantData(LandTypes.Grass, 3, subtypeId);
-			return Plant.CreatePlant(name, subtypeId);
+			var (name, info, _, _, _, price) = _worldItems.GetPlantData(LandTypes.Grass, 3, subtypeId);
+			return Plant.CreatePlant(name, subtypeId, price);
 		}
 	}
 }

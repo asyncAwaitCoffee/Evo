@@ -2,6 +2,7 @@
 using EvoApp.Environment.Plants;
 using EvoApp.Environment.Plants.Models;
 using EvoApp.Models;
+using EvoApp.Player;
 using EvoApp.Repositories;
 using EvoApp.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -16,6 +17,7 @@ namespace EvoApp.Hubs
 			[FromServices] LifeTime life,
 			[FromServices] LivingSpeciesFactory worldObjectFabric,
 			[FromServices] EvolveSchemas evolve,
+			[FromServices] PlayerService players,
 			int tierId,
 			int subtypeId,
 			int landX, int landY,
@@ -31,17 +33,26 @@ namespace EvoApp.Hubs
 			PlantFactoryBase plantFabric = worldObjectFabric.GetPlantFabric(landTile.LandType);
 
             Plant plant = plantFabric.Tier(tierId, subtypeId);
-			plant.AddEvolveSchema(evolve.Aged(10 * tierId));
-			plant.AddEvolveSchema(evolve.Eternity(10 * tierId + 5));
 
-			Coordinates coordinates = new(landX, landY, tileX, tileY);
-			plant.Coordinates = coordinates;
+			// TODO - playerId
+			if (players.Players.TryGetValue(1, out var player))
+			{
+                Console.WriteLine($"player.Score - plant.BasePrice: {player.Score - plant.BasePrice}");
 
-            life.AddToLiving(plant);
-			landTile.PlaceItem(plant, tileX, tileY);
+				player.Score -= plant.BasePrice;
 
-            Clients.All.SendAsync("PlacedItem", new { name = plant.FullName, landX, landY, tileX, tileY });
-        }
+				plant.AddEvolveSchema(evolve.Aged(10 * tierId));
+				plant.AddEvolveSchema(evolve.Eternity(10 * tierId + 5));
+
+				Coordinates coordinates = new(landX, landY, tileX, tileY);
+				plant.Coordinates = coordinates;
+
+				life.AddToLiving(plant);
+				landTile.PlaceItem(plant, tileX, tileY);
+
+				Clients.All.SendAsync("PlacedItem", new { name = plant.FullName, landX, landY, tileX, tileY, player.Score });
+			}
+		}
 
 		public void GatherPlant(
 			[FromServices] LandService land,

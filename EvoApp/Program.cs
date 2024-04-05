@@ -1,8 +1,6 @@
 using EvoApp.Environment;
 using EvoApp.Environment.Plants;
-using EvoApp.Environment.Plants.Models;
 using EvoApp.Hubs;
-using EvoApp.Models;
 using EvoApp.Repositories;
 using EvoApp.Services;
 
